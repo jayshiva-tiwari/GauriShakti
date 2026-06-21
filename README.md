@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gauri Shakti - Premium Cattle Feed Platform
 
-## Getting Started
+![Gauri Shakti Logo](/public/logo.png) <!-- Assuming a logo path, replace if necessary -->
 
-First, run the development server:
+Gauri Shakti is a premium, high-performance agriculture and cattle feed platform built for the modern Indian dairy industry. Designed with an "Awwwards-winning" aesthetic, the platform blends scientific credibility with a high-end, SaaS-grade user interface, providing farmers, dealers, and distributors with a seamless digital experience.
+
+## 🌟 Key Features
+
+- **Premium Design Aesthetic:** Ultra-minimal, high-contrast UI utilizing a curated color palette (Forest Green, Wheat Gold, Light Cream) and sophisticated glassmorphism effects.
+- **Dynamic Bento-Grid Layouts:** Highly responsive, asymmetrical product and contact pages powered by fluid CSS grid architectures.
+- **Smooth Animations:** 60fps micro-interactions, scroll-triggered fade-ups, and pulsing map pins built with Framer Motion and custom CSS animations.
+- **Performant Video Backgrounds:** Immersive hero sections with optimized, auto-playing background video loops.
+- **Smooth Scrolling:** Integrated with Lenis for a buttery-smooth scrolling experience across all viewports.
+- **Mobile-First Navigation:** A fully responsive, glassmorphism-backed mobile menu that adapts its styling intelligently based on the active page routing.
+- **WhatsApp Sales Funnel:** Persistent floating WhatsApp integration for immediate dealer and customer inquiries.
+
+## 🛠️ Technology Stack
+
+- **Framework:** [Next.js 14+ (App Router)](https://nextjs.org/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** Custom Vanilla CSS (modular) + Global CSS variables (moving away from Tailwind dependencies for custom precision)
+- **Animations:** [Framer Motion](https://www.framer.com/motion/) & CSS Keyframes
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **Backend & Storage (Planned/Integrating):** Supabase (Auth/DB), Cloudinary (Media), Email APIs (Resend/Nodemailer)
+
+## 🚀 Getting Started
+
+First, install the dependencies:
+
+```bash
+npm install
+```
+
+Set up your environment variables by creating a `.env.local` file at the root of the project. You will need keys for Supabase, Cloudinary, and any email service providers.
+
+Then, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/src/app`: Contains the Next.js App Router pages (`/`, `/about`, `/contact`, `/products`, etc.).
+- `/src/components`: Reusable UI components (`Navbar.tsx`, `Footer.tsx`, `Hero.tsx`, etc.).
+- `/src/app/globals.css`: The source of truth for the brand's design system, typography, color tokens, and global utilities (`.btn-primary`, glassmorphism classes, animations).
+- `/public`: Static assets, images, and videos used across the site.
 
-## Learn More
+## 📞 Contact & Support
 
-To learn more about Next.js, take a look at the following resources:
+**Gauri Shakti**  
+Industrial Area Phase - II,  
+Gonda, Uttar Pradesh - 271001, India  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Phone:** +91-97923 99946
+- **Email:** info@gaurishakti.com
+- **Website:** [www.gaurishakti.com](#) *(Placeholder)*
