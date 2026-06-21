@@ -291,7 +291,7 @@ export default function AboutPage() {
                 }}
               >
                 <h3 className={montserrat.className} style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)", fontWeight: 700, marginBottom: "8px" }}>
-                  Dr. A. Sharma
+                  Dr. P. SINGH
                 </h3>
                 <p style={{ color: "var(--wheat-gold)", fontWeight: 500, letterSpacing: "2px", textTransform: "uppercase", fontSize: "clamp(0.75rem, 1.5vw, 0.9rem)" }}>
                   Chief Innovator & Founder
