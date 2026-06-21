@@ -21,11 +21,49 @@
   padding: 0;
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.flex-row { display: flex; align-items: center; gap: 16px; }
+.flex-col { display: flex; flex-direction: column; gap: 12px; }
+
+@media (max-width: 1024px) {
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .grid-3, .grid-2 { grid-template-columns: 1fr; }
+  .flex-row { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background-color: var(--light-cream);
   color: var(--black);
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -275,4 +313,46 @@ input, select {
 
 input:focus, select:focus {
   border-color: var(--agri-green);
+}
+
+/* Hero Video Background */
+.hero-video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+@media (max-width: 768px) {
+  .floating-whatsapp {
+    width: 52px;
+    height: 52px;
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+/* Lenis Smooth Scroll CSS */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
