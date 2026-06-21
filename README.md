@@ -1,6 +1,7 @@
 # Gauri Shakti - Premium Cattle Feed Platform
 
-![Gauri Shakti Logo](/public/logo.png) <!-- Assuming a logo path, replace if necessary -->
+![Gauri Shakti Logo](/public/mainlogo.svg) <!-- Assuming a logo path, replace if necessary -->
+
 
 Gauri Shakti is a premium, high-performance agriculture and cattle feed platform built for the modern Indian dairy industry. Designed with an "Awwwards-winning" aesthetic, the platform blends scientific credibility with a high-end, SaaS-grade user interface, providing farmers, dealers, and distributors with a seamless digital experience.
 
@@ -39,7 +40,7 @@ Then, run the development server:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [https://gauri-shakti.vercel.app/](https://gauri-shakti.vercel.app/) with your browser to see the result.
 
 ## 📁 Project Structure
 
