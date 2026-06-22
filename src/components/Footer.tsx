@@ -123,6 +123,7 @@ export default function Footer() {
           <p className="footer-desc">
             Cultivating the finest produce with sustainable practices. From our farms to your table, freshness guaranteed.
           </p>
+          <span style={{ color: "#ffffffff", marginTop: "20px", fontSize: "10px", fontWeight: "bold" }}>Made With 🧡 By Jayshiva Tiwari</span>
         </div>
 
         {/* Quick Links */}
@@ -146,7 +147,7 @@ export default function Footer() {
             </li>
             <li className="contact-item">
               <Phone size={20} className="contact-icon" />
-              <span>+91-97923 99946</span> 
+              <span>+91-97923 99946</span>
             </li>
             <li className="contact-item">
               <Mail size={20} className="contact-icon" />
