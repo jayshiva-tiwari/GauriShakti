@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-// SECURITY FIX: Route protection middleware
-export function middleware(request: NextRequest) {
+// SECURITY FIX: Route protection proxy
+export default function proxy(request: NextRequest) {
   // Add authentication logic here
   // const token = request.cookies.get('auth_token');
   

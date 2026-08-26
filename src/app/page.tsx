@@ -16,7 +16,7 @@ export default function Home() {
       <Products />
       <WhyChooseUs />
       <MilkYieldCalculator />
-      <EnquiryCart />
+      {/* <EnquiryCart /> */}
       <Testimonials />
       <DealerSection />
       <FinalCTA />

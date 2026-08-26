@@ -6,7 +6,8 @@ import { PhoneCall } from "lucide-react";
 export default function FinalCTA() {
   return (
     <section className="cta-section">
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .cta-section {
           padding: 80px 5%;
           background: var(--light-cream);
@@ -69,7 +70,7 @@ export default function FinalCTA() {
         }
       `}} />
 
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
@@ -86,7 +87,7 @@ export default function FinalCTA() {
           <p className="cta-subtext">
             Talk to our cattle nutrition experts and discover the right feed for your farm. We guarantee noticeable results within the first month.
           </p>
-          
+
           <div className="cta-buttons-wrapper">
             <button className="btn-primary btn-pulse cta-button">
               <PhoneCall size={24} style={{ marginRight: "8px" }} /> Get Free Consultation

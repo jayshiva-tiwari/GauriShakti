@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { TrendingUp, ShieldCheck, Headphones, Megaphone, Coins } from "lucide-react";
+import DealerModal from "./DealerModal";
 
 export default function DealerSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const benefits = [
     { icon: <TrendingUp size={30} />, title: "High Market Demand", desc: "Constant requirement across all seasons." },
     { icon: <ShieldCheck size={30} />, title: "Strong Brand Trust", desc: "Farmer's first choice for premium feed." },
@@ -14,7 +17,8 @@ export default function DealerSection() {
 
   return (
     <section className="dealer-section">
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .dealer-section {
           padding: 100px 5%;
           background: var(--light-cream);
@@ -87,7 +91,7 @@ export default function DealerSection() {
       `}} />
 
       <div className="dealer-container">
-        
+
         <div className="dealer-left">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -98,8 +102,12 @@ export default function DealerSection() {
             <p className="dealer-desc">
               Join the fastest-growing cattle feed network in India. We provide our dealers with everything they need to succeed, from high-quality products to comprehensive marketing support.
             </p>
-            
-            <button className="btn-primary btn-pulse" style={{ padding: "18px 40px", fontSize: "clamp(1rem, 2.5vw, 1.2rem)" }}>
+
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="btn-primary btn-pulse"
+              style={{ display: "inline-block", padding: "18px 40px", fontSize: "clamp(1rem, 2.5vw, 1.2rem)", border: "none", cursor: "pointer" }}
+            >
               Become A Dealer
             </button>
           </motion.div>
@@ -128,6 +136,8 @@ export default function DealerSection() {
         </div>
 
       </div>
+
+      <DealerModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }

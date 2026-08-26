@@ -7,8 +7,8 @@ export default function Hero() {
   const headline = "Premium Nutrition For Higher Milk Production".split(" ");
 
   const stats = [
-    { value: "25+", label: "Years Experience" },
-    { value: "50,000+", label: "Farmers Trust Us" },
+    { value: "100%", label: "Quality Commitment" },
+    { value: "1000+", label: "Farmers Trust Us" },
     { value: "100+", label: "Distributors" },
     { value: "98%", label: "Satisfaction Rate" },
   ];
@@ -50,7 +50,7 @@ export default function Hero() {
         }
         .hero-headline {
           font-size: clamp(40px, 5vw, 72px);
-          line-height: 1.1;
+          line-height: 0.9;
           color: var(--white);
           margin-bottom: 24px;
           display: flex;
@@ -62,7 +62,7 @@ export default function Hero() {
           color: #e0e0e0;
           max-width: 600px;
           line-height: 1.6;
-          margin-bottom: 40px;
+          margin-bottom: 25px;
         }
         .hero-buttons {
           display: flex;
@@ -147,7 +147,7 @@ export default function Hero() {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundImage: "url('/hero-bg.png')",
+          backgroundImage: "url('/her-bg.jpeg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           zIndex: -2,
@@ -239,7 +239,7 @@ export default function Hero() {
                   whileHover={{ y: -5, boxShadow: "0 10px 30px rgba(212, 160, 23, 0.2)" }}
                   className="glass"
                   style={{
-                    padding: "24px",
+                    padding: "15px",
                     borderRadius: "var(--border-radius-sm)",
                     textAlign: "center",
                     flex: 1
