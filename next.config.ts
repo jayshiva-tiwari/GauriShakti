@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: 'standalone',
   // SECURITY FIX: Added HTTP Security Headers (CSP, HSTS, X-Frame-Options, etc.)
   async headers() {
     return [
