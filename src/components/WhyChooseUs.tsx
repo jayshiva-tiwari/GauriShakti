@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import Image from "next/image";
 
 function Counter({ end, suffix = "", duration = 2 }: { end: number, suffix?: string, duration?: number }) {
   const [count, setCount] = useState(0);
@@ -36,16 +35,15 @@ function Counter({ end, suffix = "", duration = 2 }: { end: number, suffix?: str
 
 export default function WhyChooseUs() {
   const features = [
-    { title: "Scientifically Balanced Nutrition", desc: "Our formulas are created by top veterinary experts to provide exact nutritional requirements for maximum yield.", icon: "/icons/nutrition.png" },
-    { title: "Better Milk Production", desc: "Farmers report an average increase of 15-20% in daily milk production within the first month of use.", icon: "/icons/milk.png" },
-    { title: "Stronger Immunity", desc: "Enriched with essential vitamins and minerals that boost cattle immunity against common diseases.", icon: "/icons/immunity.png" },
-    { title: "Consistent Quality Control", desc: "Every batch is tested in our state-of-the-art laboratory before it reaches your farm.", icon: "/icons/quality.png" },
+    { title: "Scientifically Balanced Nutrition", desc: "Our formulas are created by top veterinary experts to provide exact nutritional requirements for maximum yield.", icon: "🧪" },
+    { title: "Better Milk Production", desc: "Farmers report an average increase of 15-20% in daily milk production within the first month of use.", icon: "🐄" },
+    { title: "Stronger Immunity", desc: "Enriched with essential vitamins and minerals that boost cattle immunity against common diseases.", icon: "🌾" },
+    { title: "Consistent Quality Control", desc: "Every batch is tested in our state-of-the-art laboratory before it reaches your farm.", icon: "🚚" },
   ];
 
   return (
     <section className="why-choose-us-section">
-      <style dangerouslySetInnerHTML={{
-        __html: `
+      <style dangerouslySetInnerHTML={{__html: `
         .why-choose-us-section {
           padding: 100px 5%;
           background: var(--white);
@@ -129,16 +127,16 @@ export default function WhyChooseUs() {
       `}} />
 
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-
+        
         {/* Counters */}
         <div className="stats-grid">
           {[
-            { end: 1000, suffix: "+", label: "Farmers Served" },
-            { end: 100, suffix: "%", label: "Quality Commitment" },
-            { end: 1, suffix: "K+", label: "Bags Sold" },
-            { end: 100, suffix: "+", label: "Dealers" },
+            { end: 10000, suffix: "+", label: "Farmers Served" },
+            { end: 25, suffix: "+", label: "Years Experience" },
+            { end: 1, suffix: "M+", label: "Bags Sold" },
+            { end: 500, suffix: "+", label: "Dealers" },
           ].map((stat, i) => (
-            <motion.div
+            <motion.div 
               key={i}
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -161,7 +159,7 @@ export default function WhyChooseUs() {
 
         {/* Alternate Rows */}
         <div style={{ textAlign: "center", marginBottom: "60px" }}>
-          <motion.h2
+          <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -173,7 +171,7 @@ export default function WhyChooseUs() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: "80px" }}>
           {features.map((feature, i) => (
-            <motion.div
+            <motion.div 
               key={i}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -187,9 +185,8 @@ export default function WhyChooseUs() {
                   whileInView={{ rotate: 360 }}
                   viewport={{ once: true }}
                   transition={{ duration: 1, ease: "easeOut" }}
-                  style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
                 >
-                  <Image src={feature.icon} alt={feature.title} width={100} height={100} style={{ objectFit: "contain" }} />
+                  {feature.icon}
                 </motion.div>
               </div>
               <div className="feature-text-wrapper">
