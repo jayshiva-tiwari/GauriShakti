@@ -36,7 +36,7 @@ export default function Hero() {
 
         .hero-right {
           flex: 0 0 40%;
-          background-color: #1a1a1a;
+          background-color: #FFFFFF;
           padding: 160px 5vw 100px 60px;
           display: flex;
           align-items: center;
