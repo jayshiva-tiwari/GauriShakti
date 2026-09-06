@@ -36,7 +36,7 @@ export default function Hero() {
 
         .hero-right {
           flex: 0 0 40%;
-          background-color: #1a1a1a;
+          background-color: #FFFFFF;
           padding: 160px 5vw 100px 60px;
           display: flex;
           align-items: center;
@@ -110,30 +110,33 @@ export default function Hero() {
         }
 
         .stat-card {
-          background: #111111;
+          background: rgba(17, 17, 17, 0.75);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
           padding: 24px 16px;
-          border-radius: 12px;
+          border-radius: 16px;
           text-align: center;
           flex: 1;
-          border: 1px solid rgba(255,255,255,0.1);
-          box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
 
         .video-box-container {
           width: 100%;
-          max-width: 600px;
-          background: #2a2a2a;
-          padding: 20px;
-          border-radius: 12px;
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+          max-width: 760px;
+          background: #1a1a1a;
+          padding: 16px;
+          border-radius: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
           position: relative;
+          z-index: 2;
         }
 
         .video-wrapper {
           width: 100%;
           aspect-ratio: 16/9;
-          border-radius: 8px;
+          border-radius: 12px;
           overflow: hidden;
           background: #000;
           position: relative;
@@ -157,6 +160,83 @@ export default function Hero() {
           font-size: 0.9rem;
           text-transform: uppercase;
           letter-spacing: 1px;
+        }
+
+        /* --- Liquid Splash Border Styles --- */
+        .liquid-shadow-wrapper {
+          position: relative;
+          width: 100%;
+          max-width: 760px;
+          /* Dropshadow to make it float */
+          filter: drop-shadow(0 20px 60px rgba(0,0,0,0.15));
+        }
+
+        .liquid-bg-container {
+          position: absolute;
+          top: -20px; left: -20px; right: -20px; bottom: -20px;
+          filter: url(#gooey-milk);
+          z-index: 1;
+          opacity: 0.95;
+          pointer-events: none;
+        }
+
+        .liquid-base {
+          position: absolute;
+          top: 10px; left: 10px; right: 10px; bottom: 10px;
+          background-color: #FFFFFF;
+          border-radius: 30px;
+        }
+
+        .liquid-blob {
+          position: absolute;
+          background-color: #FFFFFF;
+          border-radius: 50%;
+        }
+
+        .blob-1 { width: 140px; height: 100px; top: -5px; left: 10%; animation: wave-h 6s ease-in-out infinite; }
+        .blob-2 { width: 100px; height: 150px; top: 15%; right: -5px; animation: wave-v 7s ease-in-out infinite reverse; }
+        .blob-3 { width: 160px; height: 110px; bottom: -10px; right: 20%; animation: wave-h 8s ease-in-out infinite 1s; }
+        .blob-4 { width: 120px; height: 160px; bottom: 15%; left: -5px; animation: wave-v 6.5s ease-in-out infinite 0.5s; }
+        .blob-5 { width: 100px; height: 100px; top: -5px; right: 25%; animation: wave-h 5.5s ease-in-out infinite 2s; }
+        .blob-6 { width: 130px; height: 100px; bottom: -5px; left: 25%; animation: wave-h 7.5s ease-in-out infinite 1.5s; }
+
+        .droplet {
+          position: absolute;
+          background-color: #FFFFFF;
+          border-radius: 50%;
+        }
+
+        .drop-1 { width: 26px; height: 26px; top: 8%; left: -5px; animation: drop-left 4.5s ease-in-out infinite; }
+        .drop-2 { width: 18px; height: 18px; top: -5px; right: 30%; animation: drop-up 5.5s ease-in-out infinite 1s; }
+        .drop-3 { width: 34px; height: 34px; bottom: -5px; left: 20%; animation: drop-down 5s ease-in-out infinite 0.5s; }
+        .drop-4 { width: 22px; height: 22px; bottom: 12%; right: -5px; animation: drop-right 6.5s ease-in-out infinite 1.5s; }
+        .drop-5 { width: 15px; height: 15px; top: -5px; left: 25%; animation: drop-up 4s ease-in-out infinite 2s; }
+        .drop-6 { width: 24px; height: 24px; bottom: -5px; right: 40%; animation: drop-down 6s ease-in-out infinite 2.5s; }
+
+        @keyframes wave-h {
+          0%, 100% { transform: translateX(0) scale(1); }
+          50% { transform: translateX(25px) scale(1.05); }
+        }
+        @keyframes wave-v {
+          0%, 100% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(25px) scale(1.05); }
+        }
+
+        @keyframes drop-up {
+          0%, 100% { transform: translateY(0) scale(1); opacity: 1; }
+          50% { transform: translateY(-45px) scale(0.4); opacity: 0; }
+        }
+        @keyframes drop-down {
+          0%, 100% { transform: translateY(0) scale(1); opacity: 1; }
+          50% { transform: translateY(45px) scale(0.4); opacity: 0; }
+        }
+        @keyframes drop-left {
+          0%, 100% { transform: translateX(0) scale(1); opacity: 1; }
+          50% { transform: translateX(-45px) scale(0.4); opacity: 0; }
+        }
+        @keyframes drop-right {
+          0%, 100% { transform: translateX(0) scale(1); opacity: 1; }
+          50% { transform: translateX(45px) scale(0.4); opacity: 0; }
         }
         
         @media (min-width: 1280px) {
@@ -292,6 +372,18 @@ export default function Hero() {
 
         {/* RIGHT SIDE - Video Box */}
         <div className="hero-right">
+          
+          {/* Gooey Filter Definition */}
+          <svg style={{ width: 0, height: 0, position: "absolute" }}>
+            <defs>
+              <filter id="gooey-milk">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10" result="goo" />
+                <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+              </filter>
+            </defs>
+          </svg>
+
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -306,7 +398,7 @@ export default function Hero() {
                 playsInline
                 className="hero-video"
               >
-                <source src="./public/Create_a_-_second_ultra_.mp4" type="video/mp4" />
+                <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
