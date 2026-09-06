@@ -121,25 +121,16 @@ export default function Hero() {
           box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
 
-        .video-box-container {
-          width: 100%;
-          max-width: 760px;
-          background: #1a1a1a;
-          padding: 16px;
-          border-radius: 16px;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        .video-wrapper {
           position: relative;
           z-index: 2;
-        }
-
-        .video-wrapper {
           width: 100%;
           aspect-ratio: 16/9;
           border-radius: 12px;
           overflow: hidden;
-          background: #000;
-          position: relative;
+          background: #1a1a1a;
+          box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+          border: 4px solid #fff;
         }
 
         .hero-video {
@@ -162,81 +153,36 @@ export default function Hero() {
           letter-spacing: 1px;
         }
 
-        /* --- Liquid Splash Border Styles --- */
-        .liquid-shadow-wrapper {
+        /* --- Liquid Splash SVG Border Styles --- */
+        .splash-video-container {
           position: relative;
           width: 100%;
-          max-width: 760px;
-          /* Dropshadow to make it float */
-          filter: drop-shadow(0 20px 60px rgba(0,0,0,0.15));
+          max-width: 700px; /* Slightly narrower to let splash protrude more */
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
-        .liquid-bg-container {
+        .liquid-splash-svg {
           position: absolute;
-          top: -20px; left: -20px; right: -20px; bottom: -20px;
-          filter: url(#gooey-milk);
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
           z-index: 1;
-          opacity: 0.95;
+          width: 130%;  /* Much larger than video to allow splash to protrude */
+          height: 140%;
           pointer-events: none;
+          filter: drop-shadow(0 15px 30px rgba(0,0,0,0.15));
+          animation: floatSplash 6s ease-in-out infinite;
         }
 
-        .liquid-base {
-          position: absolute;
-          top: 10px; left: 10px; right: 10px; bottom: 10px;
-          background-color: #FFFFFF;
-          border-radius: 30px;
-        }
-
-        .liquid-blob {
-          position: absolute;
-          background-color: #FFFFFF;
-          border-radius: 50%;
-        }
-
-        .blob-1 { width: 140px; height: 100px; top: -5px; left: 10%; animation: wave-h 6s ease-in-out infinite; }
-        .blob-2 { width: 100px; height: 150px; top: 15%; right: -5px; animation: wave-v 7s ease-in-out infinite reverse; }
-        .blob-3 { width: 160px; height: 110px; bottom: -10px; right: 20%; animation: wave-h 8s ease-in-out infinite 1s; }
-        .blob-4 { width: 120px; height: 160px; bottom: 15%; left: -5px; animation: wave-v 6.5s ease-in-out infinite 0.5s; }
-        .blob-5 { width: 100px; height: 100px; top: -5px; right: 25%; animation: wave-h 5.5s ease-in-out infinite 2s; }
-        .blob-6 { width: 130px; height: 100px; bottom: -5px; left: 25%; animation: wave-h 7.5s ease-in-out infinite 1.5s; }
-
-        .droplet {
-          position: absolute;
-          background-color: #FFFFFF;
-          border-radius: 50%;
-        }
-
-        .drop-1 { width: 26px; height: 26px; top: 8%; left: -5px; animation: drop-left 4.5s ease-in-out infinite; }
-        .drop-2 { width: 18px; height: 18px; top: -5px; right: 30%; animation: drop-up 5.5s ease-in-out infinite 1s; }
-        .drop-3 { width: 34px; height: 34px; bottom: -5px; left: 20%; animation: drop-down 5s ease-in-out infinite 0.5s; }
-        .drop-4 { width: 22px; height: 22px; bottom: 12%; right: -5px; animation: drop-right 6.5s ease-in-out infinite 1.5s; }
-        .drop-5 { width: 15px; height: 15px; top: -5px; left: 25%; animation: drop-up 4s ease-in-out infinite 2s; }
-        .drop-6 { width: 24px; height: 24px; bottom: -5px; right: 40%; animation: drop-down 6s ease-in-out infinite 2.5s; }
-
-        @keyframes wave-h {
-          0%, 100% { transform: translateX(0) scale(1); }
-          50% { transform: translateX(25px) scale(1.05); }
-        }
-        @keyframes wave-v {
-          0%, 100% { transform: translateY(0) scale(1); }
-          50% { transform: translateY(25px) scale(1.05); }
-        }
-
-        @keyframes drop-up {
-          0%, 100% { transform: translateY(0) scale(1); opacity: 1; }
-          50% { transform: translateY(-45px) scale(0.4); opacity: 0; }
-        }
-        @keyframes drop-down {
-          0%, 100% { transform: translateY(0) scale(1); opacity: 1; }
-          50% { transform: translateY(45px) scale(0.4); opacity: 0; }
-        }
-        @keyframes drop-left {
-          0%, 100% { transform: translateX(0) scale(1); opacity: 1; }
-          50% { transform: translateX(-45px) scale(0.4); opacity: 0; }
-        }
-        @keyframes drop-right {
-          0%, 100% { transform: translateX(0) scale(1); opacity: 1; }
-          50% { transform: translateX(45px) scale(0.4); opacity: 0; }
+        @keyframes floatSplash {
+          0%, 100% { 
+            transform: translate(-50%, -50%) scale(1) rotate(0deg); 
+          }
+          50% { 
+            transform: translate(-50%, -52%) scale(1.02) rotate(0.5deg); 
+          }
         }
         
         @media (min-width: 1280px) {
@@ -372,24 +318,77 @@ export default function Hero() {
 
         {/* RIGHT SIDE - Video Box */}
         <div className="hero-right">
-
-          {/* Gooey Filter Definition */}
-          <svg style={{ width: 0, height: 0, position: "absolute" }}>
-            <defs>
-              <filter id="gooey-milk">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10" result="goo" />
-                <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-              </filter>
-            </defs>
-          </svg>
-
+          
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="video-box-container"
+            className="splash-video-container"
           >
+            {/* LAYER 1: Liquid splash SVG (BEHIND video) */}
+            <svg className="liquid-splash-svg" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+              {/* Core splash shape protruding in all directions */}
+              <path fill="#FFFFFF" opacity="0.95" d="
+                M500,150 
+                C600,150 650,80 700,100 
+                C730,110 720,180 780,200 
+                C850,220 900,180 920,250 
+                C940,320 850,350 880,420 
+                C910,490 950,550 880,600 
+                C810,650 750,580 700,650 
+                C650,720 580,750 500,700 
+                C420,650 350,750 280,700 
+                C210,650 250,580 180,550 
+                C110,520 80,580 50,500 
+                C20,420 120,380 100,300 
+                C80,220 150,180 200,200 
+                C250,220 300,120 380,100 
+                C460,80 400,150 500,150 Z" 
+              />
+              
+              {/* Tendrils and Flying Droplets */}
+              {/* Top Left Area */}
+              <path fill="#FFFFFF" opacity="0.95" d="M350,120 C300,50 250,20 220,60 C190,100 280,150 350,120 Z" />
+              <circle fill="#FFFFFF" opacity="0.95" cx="200" cy="30" r="15" />
+              <circle fill="#FFFFFF" opacity="0.95" cx="150" cy="80" r="8" />
+              <circle fill="#FFFFFF" opacity="0.95" cx="280" cy="40" r="10" />
+
+              {/* Top Right Area */}
+              <path fill="#FFFFFF" opacity="0.95" d="M680,120 C750,40 820,30 850,80 C880,130 750,160 680,120 Z" />
+              <circle fill="#FFFFFF" opacity="0.95" cx="880" cy="50" r="18" />
+              <circle fill="#FFFFFF" opacity="0.95" cx="920" cy="110" r="12" />
+              <circle fill="#FFFFFF" opacity="0.95" cx="800" cy="20" r="8" />
+
+              {/* Right side Area */}
+              <path fill="#FFFFFF" opacity="0.95" d="M880,300 C960,280 990,330 960,380 C930,430 860,350 880,300 Z" />
+              <circle fill="#FFFFFF" opacity="0.95" cx="980" cy="280" r="14" />
+              <circle fill="#FFFFFF" opacity="0.95" cx="990" cy="420" r="9" />
+
+              {/* Bottom Right Area */}
+              <path fill="#FFFFFF" opacity="0.95" d="M780,600 C860,650 880,720 820,760 C760,800 720,650 780,600 Z" />
+              <circle fill="#FFFFFF" opacity="0.95" cx="890" cy="780" r="20" />
+              <circle fill="#FFFFFF" opacity="0.95" cx="800" cy="810" r="12" />
+              <circle fill="#FFFFFF" opacity="0.95" cx="930" cy="700" r="8" />
+
+              {/* Bottom Left Area */}
+              <path fill="#FFFFFF" opacity="0.95" d="M250,650 C180,720 120,750 80,700 C40,650 180,600 250,650 Z" />
+              <circle fill="#FFFFFF" opacity="0.95" cx="60" cy="760" r="16" />
+              <circle fill="#FFFFFF" opacity="0.95" cx="120" cy="800" r="10" />
+              <circle fill="#FFFFFF" opacity="0.95" cx="30" cy="680" r="12" />
+
+              {/* Left Side Area */}
+              <path fill="#FFFFFF" opacity="0.95" d="M120,400 C40,380 10,430 30,480 C50,530 140,450 120,400 Z" />
+              <circle fill="#FFFFFF" opacity="0.95" cx="20" cy="350" r="14" />
+              <circle fill="#FFFFFF" opacity="0.95" cx="10" cy="520" r="8" />
+              
+              {/* Inner connecting drips/bridges for detail */}
+              <circle fill="#FFFFFF" opacity="0.95" cx="220" cy="280" r="5" />
+              <circle fill="#FFFFFF" opacity="0.95" cx="780" cy="320" r="6" />
+              <circle fill="#FFFFFF" opacity="0.95" cx="750" cy="500" r="4" />
+              <circle fill="#FFFFFF" opacity="0.95" cx="280" cy="550" r="7" />
+            </svg>
+
+            {/* LAYER 2: Video content (VISIBLE on top) */}
             <div className="video-wrapper">
               <video
                 autoPlay
