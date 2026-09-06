@@ -5,12 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Flame } from "lucide-react";
 
 const products = [
-  { id: 1, name: "Premium Dairy Feed", category: "Dairy Feed", protein: "22%", cal: "High", isBest: true, img: "https://i.pinimg.com/736x/46/c7/4f/46c74fa1d4a0924b35ee2fa44716bbe5.jpg" },
-  { id: 2, name: "Super Yield Cattle Feed", category: "Cattle Feed", protein: "20%", cal: "High", isBest: false, img: "https://i.pinimg.com/1200x/af/1f/c2/af1fc2784822e9455c6cbd6b60d29b62.jpg" },
-  { id: 3, name: "Nutri Calf Starter", category: "Calf Starter", protein: "24%", cal: "Med", isBest: false, img: "https://i.pinimg.com/736x/c0/08/48/c008480cdbd1ea10dd3479d57b9cd818.jpg" },
-  { id: 4, name: "Gold Mineral Mixture", category: "Mineral Mixture", protein: "0%", cal: "Very High", isBest: true, img: "https://i.pinimg.com/736x/93/46/5d/93465d7bc09ed8c2484cded4e168c6f1.jpg" },
-  { id: 5, name: "Pro Milk Special", category: "Dairy Feed", protein: "23%", cal: "High", isBest: false, img: "https://i.pinimg.com/1200x/24/07/90/240790a1218c57ead5050653a6a9b4ca.jpg" },
-  { id: 6, name: "Pregnancy Special Nutrition", category: "Special Nutrition", protein: "18%", cal: "High", isBest: false, img: "https://i.pinimg.com/736x/f0/ff/0a/f0ff0a36f58b2fdb870314694754eb5c.jpg" },
+  { id: 1, name: "Premium Dairy Feed", category: "Dairy Feed", protein: "22%", cal: "High", isBest: true, img: "/products/Gaurishakti-Calf-Starter.png" },
+  { id: 2, name: "Super Yield Cattle Feed", category: "Cattle Feed", protein: "20%", cal: "High", isBest: false, img: "/products/Gaurishakti-Gold.png" },
+  { id: 3, name: "Nutri Calf Starter", category: "Calf Starter", protein: "24%", cal: "Med", isBest: false, img: "/products/Gaurishakti-Premium.png" },
+  { id: 4, name: "Gold Mineral Mixture", category: "Mineral Mixture", protein: "0%", cal: "Very High", isBest: true, img: "/products/Gaurishakti-silver.jpeg" },
+  { id: 5, name: "Pro Milk Special", category: "Dairy Feed", protein: "23%", cal: "High", isBest: false, img: "/products/Gaurishakti-Transition-Plus.png" },
+  { id: 6, name: "Pregnancy Special Nutrition", category: "Special Nutrition", protein: "18%", cal: "High", isBest: false, img: "https://i.pinimg.com/736x/64/a8/31/64a831b950c3e3e7d699368b48618dd6.jpg" },
 ];
 
 const categories = ["All", "Dairy Feed", "Cattle Feed", "Calf Starter", "Mineral Mixture", "Special Nutrition"];
@@ -24,7 +24,8 @@ export default function Products() {
 
   return (
     <section className="products-section">
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .products-section {
           padding: 80px 5%;
           background: var(--light-cream);
