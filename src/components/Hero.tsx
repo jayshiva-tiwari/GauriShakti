@@ -372,7 +372,7 @@ export default function Hero() {
 
         {/* RIGHT SIDE - Video Box */}
         <div className="hero-right">
-          
+
           {/* Gooey Filter Definition */}
           <svg style={{ width: 0, height: 0, position: "absolute" }}>
             <defs>
@@ -398,7 +398,7 @@ export default function Hero() {
                 playsInline
                 className="hero-video"
               >
-                <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4" />
+                <source src="heoVid.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
