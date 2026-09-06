@@ -125,12 +125,12 @@ export default function Hero() {
           position: relative;
           z-index: 2;
           width: 100%;
-          aspect-ratio: 16/9;
-          border-radius: 12px;
+          aspect-ratio: 4/3;
+          border-radius: 16px;
           overflow: hidden;
           background: #1a1a1a;
           box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-          border: 4px solid #fff;
+          border: 6px solid #fff;
         }
 
         .hero-video {
@@ -157,7 +157,7 @@ export default function Hero() {
         .splash-video-container {
           position: relative;
           width: 100%;
-          max-width: 700px; /* Slightly narrower to let splash protrude more */
+          max-width: 720px;
           display: flex;
           align-items: center;
           justify-content: center;
