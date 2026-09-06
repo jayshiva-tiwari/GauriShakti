@@ -306,7 +306,7 @@ export default function Hero() {
                 playsInline
                 className="hero-video"
               >
-                <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4" />
+                <source src="./public/Create_a_-_second_ultra_.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
