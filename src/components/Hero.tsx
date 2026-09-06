@@ -110,30 +110,34 @@ export default function Hero() {
         }
 
         .stat-card {
-          background: #111111;
+          background: rgba(17, 17, 17, 0.75);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
           padding: 24px 16px;
-          border-radius: 12px;
+          border-radius: 16px;
           text-align: center;
           flex: 1;
-          border: 1px solid rgba(255,255,255,0.1);
-          box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
 
         .video-box-container {
           width: 100%;
-          max-width: 600px;
-          background: #2a2a2a;
-          padding: 20px;
-          border-radius: 12px;
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+          max-width: 760px;
+          background: rgba(17, 17, 17, 0.65);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          padding: 24px;
+          border-radius: 20px;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 0 30px 60px rgba(0,0,0,0.15);
           position: relative;
         }
 
         .video-wrapper {
           width: 100%;
           aspect-ratio: 16/9;
-          border-radius: 8px;
+          border-radius: 12px;
           overflow: hidden;
           background: #000;
           position: relative;
