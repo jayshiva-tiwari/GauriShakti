@@ -318,7 +318,7 @@ export default function Hero() {
 
         {/* RIGHT SIDE - Video Box */}
         <div className="hero-right">
-          
+
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -343,9 +343,9 @@ export default function Hero() {
                 C20,420 120,380 100,300 
                 C80,220 150,180 200,200 
                 C250,220 300,120 380,100 
-                C460,80 400,150 500,150 Z" 
+                C460,80 400,150 500,150 Z"
               />
-              
+
               {/* Tendrils and Flying Droplets */}
               {/* Top Left Area */}
               <path fill="#FFFFFF" opacity="0.95" d="M350,120 C300,50 250,20 220,60 C190,100 280,150 350,120 Z" />
@@ -380,7 +380,7 @@ export default function Hero() {
               <path fill="#FFFFFF" opacity="0.95" d="M120,400 C40,380 10,430 30,480 C50,530 140,450 120,400 Z" />
               <circle fill="#FFFFFF" opacity="0.95" cx="20" cy="350" r="14" />
               <circle fill="#FFFFFF" opacity="0.95" cx="10" cy="520" r="8" />
-              
+
               {/* Inner connecting drips/bridges for detail */}
               <circle fill="#FFFFFF" opacity="0.95" cx="220" cy="280" r="5" />
               <circle fill="#FFFFFF" opacity="0.95" cx="780" cy="320" r="6" />
