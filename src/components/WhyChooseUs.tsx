@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { FlaskConical, CircleCheckBig, ShieldCheck, Beef } from "lucide-react";
 
 function Counter({ end, suffix = "", duration = 2 }: { end: number, suffix?: string, duration?: number }) {
   const [count, setCount] = useState(0);
@@ -35,10 +36,10 @@ function Counter({ end, suffix = "", duration = 2 }: { end: number, suffix?: str
 
 export default function WhyChooseUs() {
   const features = [
-    { title: "Scientifically Balanced Nutrition", desc: "Our formulas are created by top veterinary experts to provide exact nutritional requirements for maximum yield.", icon: "🧪" },
-    { title: "Better Milk Production", desc: "Farmers report an average increase of 15-20% in daily milk production within the first month of use.", icon: "🐄" },
-    { title: "Stronger Immunity", desc: "Enriched with essential vitamins and minerals that boost cattle immunity against common diseases.", icon: "🌾" },
-    { title: "Consistent Quality Control", desc: "Every batch is tested in our state-of-the-art laboratory before it reaches your farm.", icon: "🚚" },
+    { title: "Scientifically Balanced Nutrition", desc: "Our formulas are created by top veterinary experts to provide exact nutritional requirements for maximum yield.", icon: <FlaskConical size={80} color="var(--wheat-gold)" strokeWidth={1.5} /> },
+    { title: "Better Milk Production", desc: "Farmers report an average increase of 15-20% in daily milk production within the first month of use.", icon: <Beef size={80} color="var(--wheat-gold)" strokeWidth={1.5} /> },
+    { title: "Stronger Immunity", desc: "Enriched with essential vitamins and minerals that boost cattle immunity against common diseases.", icon: <ShieldCheck size={80} color="var(--wheat-gold)" strokeWidth={1.5} /> },
+    { title: "Consistent Quality Control", desc: "Every batch is tested in our state-of-the-art laboratory before it reaches your farm.", icon: <CircleCheckBig size={80} color="var(--wheat-gold)" strokeWidth={1.5} /> },
   ];
 
   return (
@@ -71,8 +72,16 @@ export default function WhyChooseUs() {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 5rem;
           box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+        }
+        
+        .feature-icon-wrapper svg {
+          filter: drop-shadow(0 10px 15px rgba(212, 160, 23, 0.2));
+          transition: transform 0.4s ease;
+        }
+        
+        .feature-row:hover .feature-icon-wrapper svg {
+          transform: scale(1.1) translateY(-5px);
         }
         .feature-text-wrapper {
           flex: 1 1 60%;
