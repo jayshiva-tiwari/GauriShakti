@@ -188,7 +188,7 @@ export default function Navbar() {
             <path transform="translate(0,0)" fill="rgb(0,0,0)" fillOpacity="0.901961" d="M 1083.86 203.194 C 1086.94 199.449 1089.21 195.366 1093.46 194.135 C 1093.07 197.33 1088.96 201.713 1086.73 204.408 L 1083.86 203.194 z" />
           </svg>
           <span className="nav-logo-text" style={{ color: shouldBeDark ? "var(--dark-green)" : "var(--white)" }}>
-            GAURi<span className="highlight">Shakti</span>
+            GAURi<span className="highlight">SHAKTI</span>
           </span>
         </div>
 
