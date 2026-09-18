@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { TrendingUp, ShieldCheck, Headphones, Megaphone, Coins } from "lucide-react";
 
@@ -99,9 +100,11 @@ export default function DealerSection() {
               Join the fastest-growing cattle feed network in India. We provide our dealers with everything they need to succeed, from high-quality products to comprehensive marketing support.
             </p>
             
-            <button className="btn-primary btn-pulse" style={{ padding: "18px 40px", fontSize: "clamp(1rem, 2.5vw, 1.2rem)" }}>
-              Become A Dealer
-            </button>
+            <Link href="/dealers" style={{ display: "inline-block" }}>
+              <button className="btn-primary btn-pulse" style={{ padding: "18px 40px", fontSize: "clamp(1rem, 2.5vw, 1.2rem)" }}>
+                Become A Dealer
+              </button>
+            </Link>
           </motion.div>
         </div>
 

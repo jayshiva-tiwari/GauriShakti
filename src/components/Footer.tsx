@@ -132,6 +132,7 @@ export default function Footer() {
           <ul className="footer-list">
             <li><Link href="/about">Our Story</Link></li>
             <li><Link href="/products">Products</Link></li>
+            <li><Link href="/dealers">Become a Dealer</Link></li>
             <li><Link href="/mission">Sustainability</Link></li>
             <li><Link href="/contact">Contact</Link></li>
           </ul>
