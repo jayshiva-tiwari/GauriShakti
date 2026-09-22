@@ -180,7 +180,7 @@ export default function AboutPage() {
                 PremiumFeed was born out of a relentless pursuit of excellence.
                 Our vision goes beyond standard cattle feed; we engineer scientifically
                 backed nutritional solutions that empower farmers, maximize yield,
-                and respect the ecosystem. Innovation isn't just a buzzword for us—it's
+                and respect the ecosystem. Innovation isn&apos;t just a buzzword for us—it&apos;s
                 the very DNA of everything we create.
               </p>
             </motion.div>

@@ -3,14 +3,15 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Flame } from "lucide-react";
+import Link from "next/link";
 
 const products = [
-  { id: 1, name: "Premium Dairy Feed", category: "Dairy Feed", protein: "22%", cal: "High", isBest: true, img: "/products/Gaurishakti-Calf-Starter.png" },
-  { id: 2, name: "Super Yield Cattle Feed", category: "Cattle Feed", protein: "20%", cal: "High", isBest: false, img: "/products/Gaurishakti-Gold.png" },
-  { id: 3, name: "Nutri Calf Starter", category: "Calf Starter", protein: "24%", cal: "Med", isBest: false, img: "/products/Gaurishakti-Premium.png" },
-  { id: 4, name: "Gold Mineral Mixture", category: "Mineral Mixture", protein: "0%", cal: "Very High", isBest: true, img: "/products/Gaurishakti-silver.png" },
-  { id: 5, name: "Pro Milk Special", category: "Dairy Feed", protein: "23%", cal: "High", isBest: false, img: "/products/Gaurishakti-Transition-Plus.png" },
-  { id: 6, name: "Pregnancy Special Nutrition", category: "Special Nutrition", protein: "18%", cal: "High", isBest: false, img: "https://i.pinimg.com/736x/64/a8/31/64a831b950c3e3e7d699368b48618dd6.jpg" },
+  { id: 1, slug: "dairy-feed", name: "Premium Dairy Feed", category: "Dairy Feed", protein: "22%", cal: "High", isBest: true, img: "/products/Gaurishakti-Premium.png" },
+  { id: 2, slug: "super-yield", name: "Super Yield Cattle Feed", category: "Cattle Feed", protein: "20%", cal: "High", isBest: false, img: "/products/Gaurishakti-Gold.png" },
+  { id: 3, slug: "calf-feed", name: "Nutri Calf Starter", category: "Calf Starter", protein: "24%", cal: "Med", isBest: false, img: "/products/Gaurishakti-Calf-Starter.png" },
+  { id: 4, slug: "mineral-mixture", name: "Gold Mineral Mixture", category: "Mineral Mixture", protein: "0%", cal: "Very High", isBest: true, img: "/products/Gaurishakti-silver.png" },
+  { id: 5, slug: "pro-milk", name: "Pro Milk Special", category: "Dairy Feed", protein: "23%", cal: "High", isBest: false, img: "/products/Gaurishakti-Transition-Plus.png" },
+  { id: 6, slug: "supplements", name: "Pregnancy Special Nutrition", category: "Special Nutrition", protein: "18%", cal: "High", isBest: false, img: "/products/Gaurishakti-Transition-Plus.png" },
 ];
 
 const categories = ["All", "Dairy Feed", "Cattle Feed", "Calf Starter", "Mineral Mixture", "Special Nutrition"];
@@ -151,12 +152,13 @@ export default function Products() {
                   <span className="nutrition-pill">Digestive Boost</span>
                 </div>
 
-                <button
+                <Link
+                  href={`/products/${product.slug}`}
                   className="btn-primary"
-                  style={{ width: "100%", justifyContent: "space-between", padding: "16px 24px" }}
+                  style={{ width: "100%", justifyContent: "space-between", padding: "16px 24px", textDecoration: "none", display: "inline-flex" }}
                 >
                   View Details <ArrowRight size={20} />
-                </button>
+                </Link>
               </motion.div>
             ))}
           </AnimatePresence>

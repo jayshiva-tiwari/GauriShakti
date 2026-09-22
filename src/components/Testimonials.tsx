@@ -123,7 +123,7 @@ export default function Testimonials() {
               </div>
 
               <p className="testimonial-review">
-                "{testimonials[current].review}"
+                &ldquo;{testimonials[current].review}&rdquo;
               </p>
 
               <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>

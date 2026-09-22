@@ -238,7 +238,7 @@ export default function ContactPage() {
           transition={{ delay: 0.6, duration: 0.8 }}
           style={{ fontSize: "clamp(1.1rem, 2vw, 1.4rem)", color: "var(--gray)", maxWidth: "600px", lineHeight: 1.6 }}
         >
-          Have a question about our products or want to discuss a partnership? We'd love to hear from you. Drop us a line below.
+          Have a question about our products or want to discuss a partnership? We&apos;d love to hear from you. Drop us a line below.
         </motion.p>
 
         {/* Bento Grid */}

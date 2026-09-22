@@ -96,7 +96,7 @@ export default function ProductsPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 1, 0.5, 1] }}
         >
-          Discover our scientifically formulated catalog designed to optimize health, increase productivity, and maximize your farm's profitability.
+          Discover our scientifically formulated catalog designed to optimize health, increase productivity, and maximize your farm&apos;s profitability.
         </motion.p>
       </div>
 

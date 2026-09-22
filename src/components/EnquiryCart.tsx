@@ -10,7 +10,7 @@ export default function EnquiryCart() {
 
   // SECURITY FIX: Input validation added for quantity
   const addToCart = () => {
-    const qty = parseInt(qtySelect as any);
+    const qty = Number(qtySelect);
     if (isNaN(qty) || qty < 1 || qty > 1000) {
       alert("Please enter a valid quantity between 1 and 1000.");
       return;
