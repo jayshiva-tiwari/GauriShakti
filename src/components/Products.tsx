@@ -11,7 +11,7 @@ const products = [
   { id: 3, slug: "calf-feed", name: "Nutri Calf Starter", category: "Calf Starter", protein: "24%", cal: "Med", isBest: false, img: "/products/Gaurishakti-Calf-Starter.png" },
   { id: 4, slug: "mineral-mixture", name: "Gold Mineral Mixture", category: "Mineral Mixture", protein: "0%", cal: "Very High", isBest: true, img: "/products/Gaurishakti-silver.png" },
   { id: 5, slug: "pro-milk", name: "Pro Milk Special", category: "Dairy Feed", protein: "23%", cal: "High", isBest: false, img: "/products/Gaurishakti-Transition-Plus.png" },
-  { id: 6, slug: "supplements", name: "Pregnancy Special Nutrition", category: "Special Nutrition", protein: "18%", cal: "High", isBest: false, img: "/products/Gaurishakti-Transition-Plus.png" },
+  // { id: 6, slug: "supplements", name: "Pregnancy Special Nutrition", category: "Special Nutrition", protein: "18%", cal: "High", isBest: false, img: "/products/Gaurishakti-Transition-Plus.png" },
 ];
 
 const categories = ["All", "Dairy Feed", "Cattle Feed", "Calf Starter", "Mineral Mixture", "Special Nutrition"];
