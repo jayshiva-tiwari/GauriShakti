@@ -961,147 +961,7 @@ Bank Details: ${formatDocStatus(formData.bankFile)}`;
           </div>
 
           {/* SECTION 5: Upload Documents */}
-          <div className="form-section">
-            <div className="section-header">
-              <FileText size={24} className="section-icon" />
-              <div>
-                <h2 className="section-title">Upload Documents</h2>
-                <span style={{ fontSize: "0.85rem", color: "#64748b" }}>
-                  Attach documents for verification (tracked by file name).
-                </span>
-              </div>
-            </div>
-
-            <div className="doc-upload-grid">
-              {/* GST */}
-              <div className="doc-upload-card">
-                <div className="doc-header">
-                  <span className="doc-name">GST Certificate</span>
-                  <span className={`doc-status-badge ${formData.gstFile ? "badge-uploaded" : "badge-optional"}`}>
-                    {formData.gstFile ? "Attached" : "Optional"}
-                  </span>
-                </div>
-                {formData.gstFile ? (
-                  <div className="attached-file-display">
-                    <span className="attached-file-name">📄 {formData.gstFile}</span>
-                    <button
-                      type="button"
-                      className="file-remove-btn"
-                      onClick={() => removeFile("gstFile")}
-                      title="Remove file"
-                    >
-                      <X size={16} />
-                    </button>
-                  </div>
-                ) : (
-                  <label className="file-input-label">
-                    <Upload size={16} /> Choose File
-                    <input
-                      type="file"
-                      style={{ display: "none" }}
-                      onChange={(e) => handleFileUpload(e, "gstFile")}
-                    />
-                  </label>
-                )}
-              </div>
-
-              {/* PAN */}
-              <div className="doc-upload-card">
-                <div className="doc-header">
-                  <span className="doc-name">PAN Card</span>
-                  <span className={`doc-status-badge ${formData.panFile ? "badge-uploaded" : "badge-optional"}`}>
-                    {formData.panFile ? "Attached" : "Optional"}
-                  </span>
-                </div>
-                {formData.panFile ? (
-                  <div className="attached-file-display">
-                    <span className="attached-file-name">📄 {formData.panFile}</span>
-                    <button
-                      type="button"
-                      className="file-remove-btn"
-                      onClick={() => removeFile("panFile")}
-                      title="Remove file"
-                    >
-                      <X size={16} />
-                    </button>
-                  </div>
-                ) : (
-                  <label className="file-input-label">
-                    <Upload size={16} /> Choose File
-                    <input
-                      type="file"
-                      style={{ display: "none" }}
-                      onChange={(e) => handleFileUpload(e, "panFile")}
-                    />
-                  </label>
-                )}
-              </div>
-
-              {/* Aadhaar */}
-              <div className="doc-upload-card">
-                <div className="doc-header">
-                  <span className="doc-name">Aadhaar Card</span>
-                  <span className={`doc-status-badge ${formData.aadhaarFile ? "badge-uploaded" : "badge-optional"}`}>
-                    {formData.aadhaarFile ? "Attached" : "Optional"}
-                  </span>
-                </div>
-                {formData.aadhaarFile ? (
-                  <div className="attached-file-display">
-                    <span className="attached-file-name">📄 {formData.aadhaarFile}</span>
-                    <button
-                      type="button"
-                      className="file-remove-btn"
-                      onClick={() => removeFile("aadhaarFile")}
-                      title="Remove file"
-                    >
-                      <X size={16} />
-                    </button>
-                  </div>
-                ) : (
-                  <label className="file-input-label">
-                    <Upload size={16} /> Choose File
-                    <input
-                      type="file"
-                      style={{ display: "none" }}
-                      onChange={(e) => handleFileUpload(e, "aadhaarFile")}
-                    />
-                  </label>
-                )}
-              </div>
-
-              {/* Bank Details */}
-              <div className="doc-upload-card">
-                <div className="doc-header">
-                  <span className="doc-name">Bank Details / Cheque</span>
-                  <span className={`doc-status-badge ${formData.bankFile ? "badge-uploaded" : "badge-optional"}`}>
-                    {formData.bankFile ? "Attached" : "Optional"}
-                  </span>
-                </div>
-                {formData.bankFile ? (
-                  <div className="attached-file-display">
-                    <span className="attached-file-name">📄 {formData.bankFile}</span>
-                    <button
-                      type="button"
-                      className="file-remove-btn"
-                      onClick={() => removeFile("bankFile")}
-                      title="Remove file"
-                    >
-                      <X size={16} />
-                    </button>
-                  </div>
-                ) : (
-                  <label className="file-input-label">
-                    <Upload size={16} /> Choose File
-                    <input
-                      type="file"
-                      style={{ display: "none" }}
-                      onChange={(e) => handleFileUpload(e, "bankFile")}
-                    />
-                  </label>
-                )}
-              </div>
-            </div>
-          </div>
+          
 
           {/* SUBMIT BUTTON - REPLACED WITH "📱 Send via WhatsApp" */}
           <div style={{ marginTop: "35px" }}>
@@ -1111,11 +971,9 @@ Bank Details: ${formatDocStatus(formData.bankFile)}`;
               className="whatsapp-button"
               id="whatsapp-submit-button"
             >
-              📱 Send via WhatsApp
+             SUBMIT
             </button>
-            <p className="button-helper-text">
-              🔒 Clicking this button will validate your application and directly format your registration details for instant dispatch to our dealer onboarding desk via WhatsApp.
-            </p>
+            
           </div>
         </form>
       </div>
