@@ -577,7 +577,7 @@ Bank Details: ${formatDocStatus(formData.bankFile)}`;
         .button-helper-text {
           text-align: center;
           font-size: 0.88rem;
-          color: #64748b;
+          color: #D4A017;
           margin-top: 14px;
           line-height: 1.5;
         }
@@ -615,7 +615,7 @@ Bank Details: ${formatDocStatus(formData.bankFile)}`;
         </Link>
         <h1 className="dealer-page-title">Vendor & Dealer Registration</h1>
         <p className="dealer-page-subtitle">
-          Join India&apos;s fastest-growing premium cattle feed network. Fill out the application form below to establish a dealership partnership with GAURiShakti.
+          Join India&apos;s fastest-growing premium cattle feed network. Fill out the application form below to establish a dealership partnership with GAURISHAKTI.
         </p>
       </div>
 
@@ -714,7 +714,7 @@ Bank Details: ${formatDocStatus(formData.bankFile)}`;
                   onChange={handleInputChange}
                   className={`form-select ${errors.natureOfFirm ? "input-error" : ""}`}
                 >
-                  <option value="">-- Select Nature of Firm --</option>
+                  <option value="">Select Nature of Firm</option>
                   {natureOfFirmOptions.map((opt) => (
                     <option key={opt} value={opt}>
                       {opt}
@@ -739,7 +739,7 @@ Bank Details: ${formatDocStatus(formData.bankFile)}`;
                   onChange={handleInputChange}
                   className={`form-select ${errors.annualTurnover ? "input-error" : ""}`}
                 >
-                  <option value="">-- Select Annual Turnover --</option>
+                  <option value="">Select Annual Turnover</option>
                   {turnoverOptions.map((opt) => (
                     <option key={opt} value={opt}>
                       {opt}
