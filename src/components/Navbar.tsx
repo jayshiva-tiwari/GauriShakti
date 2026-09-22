@@ -217,10 +217,10 @@ export default function Navbar() {
         </div>
 
         <div className="nav-buttons">
-          <a href="https://wa.me/919792399946?text=Hello" target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ background: "#25D366", padding: "8px 16px", borderRadius: "5px", color: "var(--white)", display: "flex", alignItems: "center", gap: "5px", fontSize: "14px" }}>
+          <a href="https://wa.me/919792399946?text=Hello" target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ background: "#25D366", padding: "9px 18px", borderRadius: "12px", color: "var(--white)", display: "flex", alignItems: "center", gap: "6px", fontSize: "14px", fontWeight: 600 }}>
             <Phone size={16} /> <span className="btn-whatsapp-text">WhatsApp</span>
           </a>
-          <Link href="/dealers" className="btn-primary btn-pulse" style={{ padding: "8px 16px", borderRadius: "20px", color: "var(--dark-green)", display: "inline-block", fontSize: "14px" }}>
+          <Link href="/dealers" className="btn-primary btn-pulse" style={{ padding: "9px 18px", borderRadius: "12px", color: "var(--dark-green)", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: "14px", fontWeight: 600 }}>
             Get Dealer Price
           </Link>
         </div>
@@ -275,10 +275,10 @@ export default function Navbar() {
           ))}
         </div>
         <div className="mobile-nav-buttons">
-          <a href="https://wa.me/919792399946?text=Hello" target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ background: "#25D366", width: "100%", padding: "12px", borderRadius: "5px", display: "flex", justifyContent: "center", gap: "8px" }}>
+          <a href="https://wa.me/919792399946?text=Hello" target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ background: "#25D366", width: "100%", padding: "12px", borderRadius: "12px", display: "flex", justifyContent: "center", gap: "8px", fontWeight: 600 }}>
             <Phone size={18} /> WhatsApp Us
           </a>
-          <Link href="/dealers" className="btn-primary" style={{ width: "100%", padding: "12px", borderRadius: "20px", display: "flex", justifyContent: "center" }} onClick={() => setMenuOpen(false)}>
+          <Link href="/dealers" className="btn-primary" style={{ width: "100%", padding: "12px", borderRadius: "12px", display: "flex", justifyContent: "center", fontWeight: 600 }} onClick={() => setMenuOpen(false)}>
             Get Dealer Price
           </Link>
         </div>

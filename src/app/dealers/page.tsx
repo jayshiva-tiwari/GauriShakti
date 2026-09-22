@@ -5,18 +5,10 @@ import Link from "next/link";
 import { 
   Building2, 
   User, 
-  MapPin, 
-  FileText, 
-  Upload, 
-  CheckCircle2, 
-  X, 
   AlertCircle, 
   ArrowLeft,
   Briefcase,
-  Warehouse,
-  Calendar,
-  Phone,
-  Mail
+  Warehouse
 } from "lucide-react";
 
 // ==========================================
@@ -132,22 +124,6 @@ export default function DealersPage() {
         return updated;
       });
     }
-  };
-
-  const handleFileUpload = (
-    e: ChangeEvent<HTMLInputElement>,
-    field: "gstFile" | "panFile" | "aadhaarFile" | "bankFile"
-  ) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setFormData((prev) => ({ ...prev, [field]: file.name }));
-    }
-  };
-
-  const removeFile = (
-    field: "gstFile" | "panFile" | "aadhaarFile" | "bankFile"
-  ) => {
-    setFormData((prev) => ({ ...prev, [field]: "" }));
   };
 
   const validateForm = (): boolean => {
@@ -549,7 +525,7 @@ Bank Details: ${formatDocStatus(formData.bankFile)}`;
         /* 📱 WHATSAPP BUTTON (BLUE BACKGROUND, WHITE TEXT) */
         .whatsapp-button {
           width: 100%;
-          background: #2563eb;
+          background: #D4A017;
           color: #ffffff;
           border: none;
           padding: 18px 28px;
