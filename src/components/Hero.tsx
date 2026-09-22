@@ -110,15 +110,43 @@ export default function Hero() {
         }
 
         .stat-card {
-          background: rgba(17, 17, 17, 0.75);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          padding: 24px 16px;
-          border-radius: 16px;
+          background: linear-gradient(135deg, #0F3322 0%, #174C32 50%, #0F3322 100%);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          padding: 22px 14px;
+          border-radius: 14px;
           text-align: center;
           flex: 1;
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+          border: 1px solid rgba(212, 175, 55, 0.28);
+          box-shadow: 0 10px 28px rgba(15, 51, 34, 0.22), inset 0 1px 0 rgba(212, 175, 55, 0.35);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .stat-card:hover {
+          transform: translateY(-4px);
+          border-color: rgba(212, 175, 55, 0.65);
+          background: linear-gradient(135deg, #133D29 0%, #1E5C3D 50%, #133D29 100%);
+          box-shadow: 0 14px 34px rgba(15, 51, 34, 0.35), 0 0 20px rgba(212, 175, 55, 0.22);
+        }
+
+        .stat-card-value {
+          color: #D4AF37;
+          font-size: clamp(22px, 2.4vw, 30px);
+          margin-bottom: 6px;
+          font-weight: 800;
+          line-height: 1.15;
+          letter-spacing: -0.02em;
+        }
+
+        .stat-card-label {
+          color: #FFFFFF;
+          font-weight: 600;
+          font-size: clamp(12px, 1.1vw, 14px);
+          line-height: 1.35;
+          letter-spacing: 0.01em;
+          margin: 0;
         }
 
         .video-wrapper {
@@ -286,13 +314,14 @@ export default function Hero() {
             {stats.map((stat, i) => (
               <motion.div
                 key={i}
-                whileHover={{ y: -5, boxShadow: "0 10px 20px rgba(0,0,0,0.1)" }}
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.2 }}
                 className="stat-card"
               >
-                <h3 style={{ color: "var(--wheat-gold)", fontSize: "clamp(20px, 2.5vw, 28px)", marginBottom: "4px", fontWeight: 700 }}>
+                <h3 className="stat-card-value">
                   {stat.value}
                 </h3>
-                <p style={{ color: "#E0E0E0", fontWeight: 400, fontSize: "clamp(12px, 1.2vw, 14px)", lineHeight: 1.3 }}>
+                <p className="stat-card-label">
                   {stat.label}
                 </p>
               </motion.div>
