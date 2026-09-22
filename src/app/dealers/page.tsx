@@ -542,7 +542,7 @@ Bank Details: ${formatDocStatus(formData.bankFile)}`;
           letter-spacing: 0.5px;
         }
         .whatsapp-button:hover {
-          background: #1d4ed8;
+          background: #184C33;
           transform: translateY(-2px);
           box-shadow: 0 14px 30px rgba(37, 99, 235, 0.45);
         }
