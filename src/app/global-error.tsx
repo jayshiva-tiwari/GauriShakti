@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+
 // SECURITY FIX: Global Error Boundary for the root layout
 export default function GlobalError({
   error,
@@ -8,6 +10,10 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  useEffect(() => {
+    console.error("Global application error:", error);
+  }, [error]);
+
   return (
     <html>
       <body>

@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowDown, CheckCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 
 export default function Hero() {
   const headline = "Premium Nutrition For Higher Milk Production".split(" ");
@@ -70,37 +71,48 @@ export default function Hero() {
 
         .hero-buttons {
           display: flex;
-          gap: 16px;
+          gap: 12px;
+          flex-wrap: wrap;
         }
 
+        .hero-buttons a,
         .hero-buttons button {
-          padding: 16px 32px;
-          font-size: 1.1rem;
-          border-radius: var(--border-radius-sm);
+          min-height: 56px;
+          height: 56px;
+          padding: 0 28px;
+          font-size: 16px;
+          border-radius: var(--radius-btn);
           font-weight: 600;
           cursor: pointer;
           transition: all 0.3s ease;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          box-sizing: border-box;
         }
 
         .btn-gold {
-          background-color: var(--wheat-gold);
-          color: var(--dark-green);
+          background-color: var(--accent-gold);
+          color: #1B1B1B;
           border: none;
         }
         .btn-gold:hover {
+          background-color: var(--gold-hover);
           transform: translateY(-2px);
-          box-shadow: 0 10px 20px rgba(212, 160, 23, 0.3);
+          box-shadow: var(--shadow-md);
         }
 
         .btn-outline {
           background-color: transparent;
-          color: var(--dark-green);
-          border: 2px solid var(--dark-green);
+          color: var(--primary-green);
+          border: 2px solid var(--primary-green);
         }
         .btn-outline:hover {
-          background-color: var(--dark-green);
+          background-color: var(--primary-green);
           color: #FFFFFF;
           transform: translateY(-2px);
+          box-shadow: var(--shadow-md);
         }
 
         .hero-stats {
@@ -296,12 +308,17 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 1.0 }}
             className="hero-buttons"
           >
-            <button className="btn-gold">
+            <Link href="/dealers" className="btn-gold">
               Get Price List
-            </button>
-            <button className="btn-outline">
+            </Link>
+            <a 
+              href="https://wa.me/919792399946?text=Hello%20Gaurishakti,%20I'd%20like%20to%20talk%20to%20a%20nutrition%20expert" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="btn-outline"
+            >
               Talk To Nutrition Expert
-            </button>
+            </a>
           </motion.div>
 
           {/* Stats Boxes */}

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { 
   CheckCircle2, 
   MessageCircle, 
@@ -1025,10 +1026,14 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
         <div className="pd-hero-container">
           {/* Left: Product Image */}
           <div className="pd-image-wrapper">
-            <img 
+            <Image 
               src={product.image} 
               alt={product.name} 
+              width={500}
+              height={440}
               className="pd-main-img"
+              priority
+              style={{ objectFit: "contain", maxHeight: "440px", width: "auto" }}
             />
           </div>
 
@@ -1290,10 +1295,13 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
                 className="pd-related-card"
               >
                 <div className="pd-related-img-box">
-                  <img 
+                  <Image 
                     src={relProduct.image} 
                     alt={relProduct.name} 
+                    width={320}
+                    height={220}
                     className="pd-related-img"
+                    style={{ objectFit: "contain", maxHeight: "100%", width: "auto" }}
                   />
                 </div>
                 <div className="pd-category-tag" style={{ fontSize: "0.75rem", marginBottom: "6px" }}>

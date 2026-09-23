@@ -53,9 +53,22 @@ export default function WhyChooseUs() {
         .stats-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 40px;
+          gap: 20px;
           text-align: center;
-          margin-bottom: 100px;
+          margin-bottom: 80px;
+        }
+        .stat-counter-card {
+          background: linear-gradient(135deg, #0F3322 0%, #174C32 50%, #0F3322 100%);
+          padding: 28px 16px;
+          border-radius: var(--radius-card);
+          border: 1px solid rgba(212, 175, 55, 0.28);
+          box-shadow: 0 10px 28px rgba(15, 51, 34, 0.22), inset 0 1px 0 rgba(212, 175, 55, 0.35);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .stat-counter-card:hover {
+          transform: translateY(-4px);
+          border-color: rgba(212, 175, 55, 0.65);
+          box-shadow: 0 14px 34px rgba(15, 51, 34, 0.35), 0 0 20px rgba(212, 175, 55, 0.22);
         }
         .feature-row {
           display: flex;
@@ -143,25 +156,20 @@ export default function WhyChooseUs() {
             { end: 10000, suffix: "+", label: "Farmers Served" },
             { end: 25, suffix: "+", label: "Years Experience" },
             { end: 1, suffix: "M+", label: "Bags Sold" },
-            { end: 500, suffix: "+", label: "Dealers" },
+            { end: 500, suffix: "+", label: "Authorized Dealers" },
           ].map((stat, i) => (
             <motion.div 
               key={i}
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              style={{
-                background: "var(--light-cream)",
-                padding: "30px",
-                borderRadius: "var(--border-radius-lg)",
-                boxShadow: "0 10px 30px rgba(0,0,0,0.05)"
-              }}
+              className="stat-counter-card"
             >
-              <h3 style={{ fontSize: "clamp(2rem, 5vw, 3rem)", color: "var(--wheat-gold)", marginBottom: "10px" }}>
+              <h3 style={{ fontSize: "clamp(2rem, 4vw, 2.75rem)", color: "var(--accent-gold)", fontWeight: 800, marginBottom: "8px", letterSpacing: "-0.02em" }}>
                 <Counter end={stat.end} suffix={stat.suffix} />
               </h3>
-              <p style={{ fontSize: "clamp(0.9rem, 2vw, 1.1rem)", fontWeight: 600, color: "var(--dark-green)" }}>{stat.label}</p>
+              <p style={{ fontSize: "14px", fontWeight: 600, color: "#FFFFFF", margin: 0, letterSpacing: "0.01em" }}>{stat.label}</p>
             </motion.div>
           ))}
         </div>

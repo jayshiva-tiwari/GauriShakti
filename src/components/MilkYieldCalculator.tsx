@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 
 export default function MilkYieldCalculator() {
   const [cows, setCows] = useState<number>(10);

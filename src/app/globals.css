@@ -1,24 +1,61 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --dark-green: #0B3D2E;
-  --agri-green: #1F7A4D;
-  --wheat-gold: #D4A017;
-  --light-cream: #F5F5F0;
+  /* GAURiShakti Design System Colors */
+  --primary-green: #1B5E3F;
+  --dark-green: #1B5E3F;
+  --forest-deep: #0F3322;
+  --agri-green: #10B981;
+  --accent-gold: #D4AF37;
+  --wheat-gold: #D4AF37;
+  --gold-hover: #C49D2A;
+  --bg-clean: #FFFFFF;
+  --bg-subtle: #F8F8F8;
+  --light-cream: #F8F8F8;
   --white: #FFFFFF;
-  --black: #111111;
+  --text-dark: #1B1B1B;
+  --text-secondary: #2D2D2D;
+  --text-muted: #666666;
+  --black: #1B1B1B;
   --gray: #666666;
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  --border-color: #E5E5E5;
+  --border-light: #E5E5E5;
+  --success: #10B981;
+  --error: #EF4444;
+
+  /* Spacing Scale (8px base) */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* Border Radii */
+  --radius-btn: 24px;
+  --radius-card: 16px;
+  --radius-img: 12px;
+  --radius-sm: 8px;
   --border-radius-sm: 16px;
   --border-radius-lg: 24px;
+
+  /* Shadow System */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 *, *::before, *::after {
@@ -26,6 +63,23 @@
 }
 
 html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-clean);
+  color: var(--text-dark);
+  line-height: 1.6;
+  overflow-x: clip;
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-dark);
 }
 
 img, video {
@@ -34,36 +88,147 @@ img, video {
   display: block;
 }
 
+/* Touch Targets: minimum 48px */
+button, a, input, select, textarea {
+  touch-action: manipulation;
+}
+
 .container {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
 }
 
-.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-.flex-row { display: flex; align-items: center; gap: 16px; }
-.flex-col { display: flex; flex-direction: column; gap: 12px; }
-
-@media (max-width: 1024px) {
-  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 768px) {
+  .container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 }
 
-@media (max-width: 768px) {
-  .grid-3, .grid-2 { grid-template-columns: 1fr; }
-  .flex-row { flex-direction: column; align-items: flex-start; }
-}
-
-@media (max-width: 480px) {
-  .container { padding: 0 16px; }
-}
-
-body {
+/* Standard Button System (Pill-shaped 56px height) */
+.btn-primary {
+  background-color: var(--accent-gold);
+  color: #1B1B1B;
   font-family: 'Inter', sans-serif;
-  background-color: var(--light-cream);
-  color: var(--black);
-  overflow-x: clip;
+  font-weight: 600;
+  font-size: 16px;
+  min-height: 56px;
+  height: 56px;
+  padding: 0 28px;
+  border-radius: var(--radius-btn);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+@media (hover: hover) {
+  .btn-primary:hover {
+    background-color: var(--gold-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary {
+  background-color: #FFFFFF;
+  color: var(--primary-green);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  min-height: 56px;
+  height: 56px;
+  padding: 0 28px;
+  border-radius: var(--radius-btn);
+  border: 2px solid var(--primary-green);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .btn-secondary:hover {
+    background-color: var(--primary-green);
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+.btn-whatsapp {
+  background-color: #25D366;
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  min-height: 56px;
+  height: 56px;
+  padding: 0 28px;
+  border-radius: var(--radius-btn);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .btn-whatsapp:hover {
+    background-color: #20BA5A;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+  }
+}
+
+/* Form Inputs (48px height, 16px font to prevent iOS auto-zoom) */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+select,
+textarea {
+  font-size: 16px !important;
+  min-height: 48px;
+  border-radius: 12px;
+  border: 2px solid var(--border-color);
+  padding: 12px 16px;
+  background-color: #FFFFFF;
+  color: var(--text-dark);
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
 }
 
 h1, h2, h3, h4, h5, h6 {
