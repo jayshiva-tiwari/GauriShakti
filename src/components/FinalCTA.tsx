@@ -1,9 +1,18 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PhoneCall } from "lucide-react";
+import ConsultationModal from "@/components/consultation/ConsultationModal";
 
 export default function FinalCTA() {
+  const [isConsultationOpen, setIsConsultationOpen] = useState(false);
+
+  useEffect(() => {
+    const handleOpen = () => setIsConsultationOpen(true);
+    window.addEventListener("open-consultation-modal", handleOpen);
+    return () => window.removeEventListener("open-consultation-modal", handleOpen);
+  }, []);
   return (
     <section className="cta-section">
       <style dangerouslySetInnerHTML={{__html: `
@@ -88,12 +97,23 @@ export default function FinalCTA() {
           </p>
           
           <div className="cta-buttons-wrapper">
-            <button className="btn-primary btn-pulse cta-button">
+            <button 
+              type="button"
+              onClick={() => setIsConsultationOpen(true)}
+              className="btn-primary btn-pulse cta-button"
+              aria-haspopup="dialog"
+            >
               <PhoneCall size={24} style={{ marginRight: "8px" }} /> Get Free Consultation
             </button>
           </div>
         </div>
       </motion.div>
+
+      {/* WhatsApp Consultation Modal */}
+      <ConsultationModal 
+        isOpen={isConsultationOpen} 
+        onClose={() => setIsConsultationOpen(false)} 
+      />
     </section>
   );
 }
