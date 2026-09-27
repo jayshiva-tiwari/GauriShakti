@@ -205,7 +205,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
       : "";
 
     const message = [
-      "Hello Gaurishakti Team 👋",
+      "Hello Gaurishakti Team !!",
       "",
       "I would like to get a free cattle nutrition consultation.",
       "",

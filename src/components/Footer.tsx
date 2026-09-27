@@ -143,7 +143,7 @@ export default function Footer() {
         {/* Brand Section */}
         <div className="footer-brand">
           <div className="footer-title">
-            GAURI<span>SHAKTI</span>
+            GAURISHAKTI
           </div>
           <p className="footer-desc">
             Cultivating the finest produce with sustainable practices. From our farms to your table, freshness guaranteed.
@@ -158,7 +158,6 @@ export default function Footer() {
             <li><Link href="/about">Our Story</Link></li>
             <li><Link href="/products">Products</Link></li>
             <li><Link href="/dealers">Become a Dealer</Link></li>
-            <li><Link href="/mission">Sustainability</Link></li>
             <li><Link href="/contact">Contact</Link></li>
           </ul>
         </div>
@@ -177,7 +176,7 @@ export default function Footer() {
             </li>
             <li className="contact-item">
               <Mail size={20} className="contact-icon" />
-              <span>info@gaurishakti.com</span>
+              <span >hello@gaurishakti.in</span>
             </li>
           </ul>
         </div>
@@ -186,10 +185,10 @@ export default function Footer() {
       <div className="footer-bottom">
         <p className="footer-copyright">© {new Date().getFullYear()} Gauri Shakti. All rights reserved.</p>
         <div className="footer-socials">
-          <a href="https://www.instagram.com/pankaj39singh9946?igsh=MWp4cnZoMGRlZ3VmYw==" target="_blank" rel="noopener noreferrer" className="social-link">Facebook</a>
-          <a href="https://www.instagram.com/pankaj39singh9946?igsh=MWp4cnZoMGRlZ3VmYw==" target="_blank" rel="noopener noreferrer" className="social-link">Instagram</a>
-          <a href="https://www.instagram.com/pankaj39singh9946?igsh=MWp4cnZoMGRlZ3VmYw==" target="_blank" rel="noopener noreferrer" className="social-link">YouTube</a>
-          <a href="https://www.linkedin.com/in/pankaj-singh-50b835144?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="social-link">LinkedIn</a>
+          <a href="https://www.facebook.com/profile.php?id=61593427798733" target="_blank" rel="noopener noreferrer" className="social-link">Facebook</a>
+          <a href="https://www.instagram.com/gaurishaktifeeds/" target="_blank" rel="noopener noreferrer" className="social-link">Instagram</a>
+          <a href="" target="_blank" rel="noopener noreferrer" className="social-link">YouTube</a>
+          <a href="https://www.linkedin.com/company/gaurishakti/" target="_blank" rel="noopener noreferrer" className="social-link">LinkedIn</a>
         </div>
       </div>
     </footer>
