@@ -3,6 +3,12 @@
 import { ReactNode, useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
 
+declare global {
+  interface Window {
+    __lenis?: Lenis;
+  }
+}
+
 export default function SmoothScrollProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const lenis = new Lenis({
@@ -15,6 +21,8 @@ export default function SmoothScrollProvider({ children }: { children: ReactNode
       touchMultiplier: 2,
     });
 
+    window.__lenis = lenis;
+
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -23,6 +31,7 @@ export default function SmoothScrollProvider({ children }: { children: ReactNode
     requestAnimationFrame(raf);
 
     return () => {
+      delete window.__lenis;
       lenis.destroy();
     };
   }, []);

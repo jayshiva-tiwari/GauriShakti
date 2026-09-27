@@ -6,9 +6,9 @@ import {
   X, 
   Send, 
   Phone, 
-  Sparkles, 
   CheckCircle2, 
-  ExternalLink
+  ExternalLink,
+  ChevronDown
 } from "lucide-react";
 import { GAURISHAKTI_WHATSAPP_NUMBER } from "@/config/whatsapp";
 
@@ -63,6 +63,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
   const [lastGeneratedUrl, setLastGeneratedUrl] = useState("");
   
   const modalContentRef = useRef<HTMLDivElement>(null);
+  const scrollableBodyRef = useRef<HTMLDivElement>(null);
   const firstInputRef = useRef<HTMLInputElement>(null);
 
   const handleModalClose = useCallback(() => {
@@ -81,9 +82,16 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
   useEffect(() => {
     if (!isOpen) return;
 
-    // Save previous overflow
-    const originalOverflow = document.body.style.overflow;
+    // Save previous overflow state
+    const prevOverflow = document.body.style.overflow;
+    const prevTouchAction = document.body.style.touchAction;
     document.body.style.overflow = "hidden";
+    document.body.style.touchAction = "none";
+
+    // Pause Lenis smooth scroll so it does not intercept modal scroll
+    if (typeof window !== "undefined" && window.__lenis) {
+      window.__lenis.stop();
+    }
 
     // Focus first input on open
     const timer = setTimeout(() => {
@@ -99,7 +107,11 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.body.style.overflow = originalOverflow;
+      document.body.style.overflow = prevOverflow;
+      document.body.style.touchAction = prevTouchAction;
+      if (typeof window !== "undefined" && window.__lenis) {
+        window.__lenis.start();
+      }
       window.removeEventListener("keydown", handleKeyDown);
       clearTimeout(timer);
     };
@@ -156,7 +168,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
     // 4. Number of Cattle
     const cattleNum = parseInt(formData.cattleCount, 10);
     if (!formData.cattleCount.trim() || isNaN(cattleNum) || cattleNum <= 0) {
-      newErrors.cattleCount = "Please enter the number of cattle (at least 1).";
+      newErrors.cattleCount = "Please enter the number of cattle.";
     }
 
     // 5. Requirement
@@ -174,12 +186,16 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
     e.preventDefault();
 
     if (!validate()) {
+      // Scroll to the first error if needed
+      if (scrollableBodyRef.current) {
+        scrollableBodyRef.current.scrollTo({ top: 0, behavior: "smooth" });
+      }
       return;
     }
 
     setIsSubmitting(true);
 
-    // Build the clean WhatsApp message
+    // Build the professional WhatsApp message
     const requirementText = formData.requirement === "Other"
       ? `Other\n\n*Additional Details:*\n${formData.otherDetails.trim()}`
       : formData.requirement;
@@ -208,12 +224,12 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
     const whatsappUrl = `https://wa.me/${GAURISHAKTI_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     setLastGeneratedUrl(whatsappUrl);
 
-    // Give a brief realistic UI transition so the user sees "Opening WhatsApp..."
+    // Provide a brief UI transition before triggering WhatsApp
     setTimeout(() => {
       try {
         window.open(whatsappUrl, "_blank", "noopener,noreferrer");
       } catch {
-        // Fallback handled in success screen if popup blocked
+        // Fallback handled on success screen if popup blocker interferes
       }
       setIsSubmitting(false);
       setIsSubmittedSuccess(true);
@@ -225,6 +241,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
       {isOpen && (
         <div 
           className="consultation-modal-overlay" 
+          data-lenis-prevent="true"
           onClick={handleModalClose}
           role="dialog"
           aria-modal="true"
@@ -235,103 +252,135 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
             .consultation-modal-overlay {
               position: fixed;
               inset: 0;
-              z-index: 9999;
-              background: rgba(10, 38, 25, 0.75);
-              backdrop-filter: blur(8px);
-              -webkit-backdrop-filter: blur(8px);
+              z-index: 99999;
+              background: rgba(15, 23, 42, 0.65);
+              backdrop-filter: blur(4px);
+              -webkit-backdrop-filter: blur(4px);
               display: flex;
               align-items: center;
               justify-content: center;
               padding: 16px;
               overflow-y: auto;
+              -webkit-overflow-scrolling: touch;
               overscroll-behavior: contain;
             }
 
             .consultation-modal-box {
               background: #FFFFFF;
               width: 100%;
-              max-width: 540px;
-              border-radius: 20px;
-              box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(212, 175, 55, 0.2);
+              max-width: 580px;
+              max-height: min(90vh, 760px);
+              max-height: min(90dvh, 760px);
+              border-radius: 12px;
+              border: 1px solid #E2E8F0;
+              box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.05);
+              display: flex;
+              flex-direction: column;
               position: relative;
               overflow: hidden;
               margin: auto;
-              display: flex;
-              flex-direction: column;
-              max-height: 92vh;
+            }
+
+            /* Classic forest and gold accent bar */
+            .consultation-modal-box::before {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              height: 4px;
+              background: linear-gradient(90deg, #164E33 0%, #1B5E3F 75%, #D4AF37 100%);
+              z-index: 10;
             }
 
             .consultation-modal-header {
-              padding: 24px 28px 20px;
-              background: linear-gradient(135deg, #0F3322 0%, #1B5E3F 100%);
-              color: #FFFFFF;
+              padding: 22px 28px 18px;
+              background: #FFFFFF;
+              border-bottom: 1px solid #F1F5F9;
               position: relative;
-              border-bottom: 2px solid #D4AF37;
+              flex-shrink: 0;
             }
 
             .consultation-close-btn {
               position: absolute;
               top: 18px;
               right: 18px;
-              width: 36px;
-              height: 36px;
-              border-radius: 50%;
-              background: rgba(255, 255, 255, 0.12);
-              border: 1px solid rgba(255, 255, 255, 0.2);
-              color: #FFFFFF;
+              width: 32px;
+              height: 32px;
+              border-radius: 6px;
+              background: transparent;
+              border: 1px solid transparent;
+              color: #64748B;
               display: flex;
               align-items: center;
               justify-content: center;
               cursor: pointer;
-              transition: all 0.2s ease;
+              transition: all 0.15s ease;
             }
 
             .consultation-close-btn:hover {
-              background: rgba(212, 175, 55, 0.9);
-              color: #1B1B1B;
-              transform: rotate(90deg);
-            }
-
-            .consultation-badge {
-              display: inline-flex;
-              align-items: center;
-              gap: 6px;
-              background: rgba(212, 175, 55, 0.18);
-              border: 1px solid #D4AF37;
-              color: #D4AF37;
-              padding: 4px 10px;
-              border-radius: 20px;
-              font-size: 11px;
-              font-weight: 700;
-              text-transform: uppercase;
-              letter-spacing: 0.5px;
-              margin-bottom: 8px;
+              background: #F1F5F9;
+              color: #0F172A;
+              border-color: #E2E8F0;
             }
 
             .consultation-modal-title {
               font-family: 'Outfit', sans-serif;
-              font-size: 24px;
-              font-weight: 700;
-              color: #FFFFFF;
-              margin: 0 0 6px;
-              line-height: 1.25;
+              font-size: 22px;
+              font-weight: 600;
+              color: #0F172A;
+              margin: 0 0 4px;
+              line-height: 1.3;
+              letter-spacing: -0.01em;
             }
 
             .consultation-modal-subtitle {
-              font-size: 13px;
-              color: #E2E8F0;
+              font-size: 13.5px;
+              color: #64748B;
               margin: 0;
               line-height: 1.5;
             }
 
+            /* Scrollable body with strict flex child scroll boundaries */
             .consultation-modal-body {
               padding: 24px 28px;
-              overflow-y: auto;
+              overflow-y: auto !important;
+              overflow-x: hidden;
+              flex: 1 1 auto;
+              min-height: 0;
               -webkit-overflow-scrolling: touch;
+              overscroll-behavior: contain;
+              touch-action: pan-y;
+            }
+
+            /* Sleek classic scrollbar */
+            .consultation-modal-body::-webkit-scrollbar {
+              width: 6px;
+            }
+            .consultation-modal-body::-webkit-scrollbar-track {
+              background: #F8FAFC;
+            }
+            .consultation-modal-body::-webkit-scrollbar-thumb {
+              background: #CBD5E1;
+              border-radius: 3px;
+            }
+            .consultation-modal-body::-webkit-scrollbar-thumb:hover {
+              background: #94A3B8;
+            }
+
+            .consultation-form-grid {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 16px;
+              margin-bottom: 16px;
             }
 
             .consultation-form-group {
-              margin-bottom: 18px;
+              margin-bottom: 16px;
+            }
+
+            .consultation-form-grid .consultation-form-group {
+              margin-bottom: 0;
             }
 
             .consultation-label {
@@ -340,13 +389,14 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
               justify-content: space-between;
               font-size: 13px;
               font-weight: 600;
-              color: #1B1B1B;
+              color: #1E293B;
               margin-bottom: 6px;
+              letter-spacing: 0.01em;
             }
 
             .consultation-label-required {
-              color: #EF4444;
-              margin-left: 3px;
+              color: #DC2626;
+              margin-left: 2px;
             }
 
             .consultation-input-wrapper {
@@ -357,29 +407,29 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
 
             .consultation-input-prefix {
               position: absolute;
-              left: 14px;
-              font-size: 14px;
-              font-weight: 700;
-              color: #1B5E3F;
+              left: 12px;
+              font-size: 13.5px;
+              font-weight: 600;
+              color: #164E33;
               display: flex;
               align-items: center;
               gap: 4px;
               pointer-events: none;
-              border-right: 1px solid #E5E5E5;
-              padding-right: 10px;
+              border-right: 1px solid #E2E8F0;
+              padding-right: 8px;
             }
 
             .consultation-input {
               width: 100%;
-              min-height: 48px;
-              padding: 12px 14px;
-              font-size: 15px;
-              border-radius: 12px;
-              border: 1.5px solid #E5E5E5;
-              background: #FFFFFF;
-              color: #1B1B1B;
+              height: 44px;
+              padding: 10px 14px;
+              font-size: 14.5px;
+              border-radius: 8px;
+              border: 1px solid #CBD5E1;
+              background: #F8FAFC;
+              color: #0F172A;
               font-family: inherit;
-              transition: all 0.2s ease;
+              transition: all 0.15s ease;
               box-sizing: border-box;
             }
 
@@ -389,8 +439,9 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
 
             .consultation-input:focus {
               outline: none;
-              border-color: #D4AF37;
-              box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
+              background: #FFFFFF;
+              border-color: #164E33;
+              box-shadow: 0 0 0 3px rgba(22, 78, 51, 0.12);
             }
 
             .consultation-input.has-error {
@@ -405,31 +456,37 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
             .consultation-error-msg {
               font-size: 12px;
               color: #DC2626;
-              margin-top: 5px;
-              display: flex;
-              align-items: center;
-              gap: 4px;
+              margin-top: 4px;
               font-weight: 500;
+              line-height: 1.4;
+            }
+
+            .consultation-select-wrapper {
+              position: relative;
             }
 
             .consultation-select {
               width: 100%;
-              min-height: 48px;
-              padding: 12px 14px;
-              font-size: 15px;
-              border-radius: 12px;
-              border: 1.5px solid #E5E5E5;
-              background: #FFFFFF;
-              color: #1B1B1B;
+              height: 44px;
+              padding: 10px 36px 10px 14px;
+              font-size: 14.5px;
+              border-radius: 8px;
+              border: 1px solid #CBD5E1;
+              background: #F8FAFC;
+              color: #0F172A;
               font-family: inherit;
               cursor: pointer;
-              transition: all 0.2s ease;
+              appearance: none;
+              -webkit-appearance: none;
+              transition: all 0.15s ease;
+              box-sizing: border-box;
             }
 
             .consultation-select:focus {
               outline: none;
-              border-color: #D4AF37;
-              box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
+              background: #FFFFFF;
+              border-color: #164E33;
+              box-shadow: 0 0 0 3px rgba(22, 78, 51, 0.12);
             }
 
             .consultation-select.has-error {
@@ -437,25 +494,34 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
               background-color: #FEF2F2;
             }
 
+            .consultation-select-icon {
+              position: absolute;
+              right: 12px;
+              top: 50%;
+              transform: translateY(-50%);
+              pointer-events: none;
+              color: #64748B;
+            }
+
             .consultation-textarea {
               width: 100%;
-              min-height: 80px;
-              padding: 12px 14px;
-              font-size: 15px;
-              border-radius: 12px;
-              border: 1.5px solid #E5E5E5;
-              background: #FFFFFF;
-              color: #1B1B1B;
+              padding: 10px 14px;
+              font-size: 14.5px;
+              border-radius: 8px;
+              border: 1px solid #CBD5E1;
+              background: #F8FAFC;
+              color: #0F172A;
               font-family: inherit;
               resize: vertical;
-              transition: all 0.2s ease;
+              transition: all 0.15s ease;
               box-sizing: border-box;
             }
 
             .consultation-textarea:focus {
               outline: none;
-              border-color: #D4AF37;
-              box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
+              background: #FFFFFF;
+              border-color: #164E33;
+              box-shadow: 0 0 0 3px rgba(22, 78, 51, 0.12);
             }
 
             .consultation-textarea.has-error {
@@ -465,113 +531,102 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
 
             .consultation-submit-btn {
               width: 100%;
-              min-height: 54px;
-              background: #D4AF37;
-              color: #1B1B1B;
-              border: none;
-              border-radius: 27px;
-              font-size: 16px;
-              font-weight: 700;
-              font-family: 'Outfit', sans-serif;
+              height: 48px;
+              background: #164E33;
+              color: #FFFFFF;
+              border: 1px solid #0F3824;
+              border-radius: 8px;
+              font-size: 15px;
+              font-weight: 600;
+              font-family: inherit;
               display: flex;
               align-items: center;
               justify-content: center;
-              gap: 10px;
+              gap: 8px;
               cursor: pointer;
-              transition: all 0.3s ease;
-              box-shadow: 0 6px 18px rgba(212, 175, 55, 0.35);
-              margin-top: 10px;
+              transition: all 0.15s ease;
+              margin-top: 8px;
+              box-shadow: 0 2px 6px rgba(22, 78, 51, 0.2);
             }
 
             .consultation-submit-btn:hover:not(:disabled) {
-              background: #C49D2A;
-              transform: translateY(-2px);
-              box-shadow: 0 10px 24px rgba(212, 175, 55, 0.45);
+              background: #0F3824;
+              box-shadow: 0 4px 12px rgba(22, 78, 51, 0.3);
             }
 
             .consultation-submit-btn:active:not(:disabled) {
-              transform: translateY(0);
+              transform: translateY(1px);
             }
 
             .consultation-submit-btn:disabled {
-              opacity: 0.7;
+              opacity: 0.65;
               cursor: not-allowed;
-            }
-
-            .consultation-privacy-note {
-              text-align: center;
-              font-size: 11px;
-              color: #64748B;
-              margin-top: 12px;
-              line-height: 1.4;
             }
 
             /* Success State */
             .consultation-success-card {
               text-align: center;
-              padding: 36px 20px 24px;
+              padding: 32px 16px 20px;
             }
 
             .consultation-success-icon {
-              width: 72px;
-              height: 72px;
-              background: #DCFCE7;
-              color: #15803D;
+              width: 56px;
+              height: 56px;
+              background: #ECFDF5;
+              color: #059669;
               border-radius: 50%;
               display: flex;
               align-items: center;
               justify-content: center;
-              margin: 0 auto 20px;
-              border: 3px solid #BBF7D0;
+              margin: 0 auto 16px;
+              border: 1px solid #A7F3D0;
             }
 
             .consultation-success-title {
-              font-size: 24px;
-              font-weight: 700;
-              color: #0F3322;
-              margin-bottom: 12px;
+              font-size: 20px;
+              font-weight: 600;
+              color: #0F172A;
+              margin-bottom: 8px;
               font-family: 'Outfit', sans-serif;
             }
 
             .consultation-success-desc {
               font-size: 14px;
-              color: #334155;
+              color: #475569;
               line-height: 1.6;
               max-width: 420px;
-              margin: 0 auto 24px;
+              margin: 0 auto 20px;
             }
 
-            .consultation-whatsapp-pill {
+            .consultation-whatsapp-link {
               display: inline-flex;
               align-items: center;
               gap: 8px;
               background: #25D366;
               color: #FFFFFF;
               font-weight: 600;
-              padding: 12px 22px;
-              border-radius: 24px;
+              padding: 10px 20px;
+              border-radius: 8px;
               text-decoration: none;
               font-size: 14px;
               margin-bottom: 20px;
-              transition: all 0.2s ease;
-              box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);
+              transition: all 0.15s ease;
             }
 
-            .consultation-whatsapp-pill:hover {
-              background: #20BA5A;
-              transform: translateY(-2px);
+            .consultation-whatsapp-link:hover {
+              background: #1EBE5D;
             }
 
             .consultation-close-modal-btn {
               background: #F1F5F9;
-              color: #334155;
-              border: 1px solid #CBD5E1;
-              padding: 10px 28px;
-              border-radius: 20px;
-              font-size: 14px;
-              font-weight: 600;
+              color: #475569;
+              border: 1px solid #E2E8F0;
+              padding: 9px 24px;
+              border-radius: 8px;
+              font-size: 13.5px;
+              font-weight: 500;
               cursor: pointer;
-              transition: all 0.2s ease;
+              transition: all 0.15s ease;
             }
 
             .consultation-close-modal-btn:hover {
@@ -581,34 +636,39 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
 
             @media (max-width: 640px) {
               .consultation-modal-overlay {
-                padding: 12px;
+                padding: 10px;
+              }
+              .consultation-form-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
               }
               .consultation-modal-header {
-                padding: 20px 20px 16px;
+                padding: 18px 20px 14px;
               }
               .consultation-modal-title {
-                font-size: 20px;
+                font-size: 19px;
               }
               .consultation-modal-body {
-                padding: 20px;
+                padding: 18px 20px 20px;
               }
               .consultation-submit-btn {
-                min-height: 50px;
-                font-size: 15px;
+                height: 46px;
+                font-size: 14.5px;
               }
             }
           `}} />
 
           <motion.div
             ref={modalContentRef}
-            initial={{ opacity: 0, scale: 0.95, y: 15 }}
+            data-lenis-prevent="true"
+            initial={{ opacity: 0, scale: 0.96, y: 8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 15 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
+            exit={{ opacity: 0, scale: 0.96, y: 8 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
             className="consultation-modal-box"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header */}
+            {/* Minimal Classic Header */}
             <div className="consultation-modal-header">
               <button 
                 type="button" 
@@ -616,13 +676,8 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                 className="consultation-close-btn"
                 aria-label="Close consultation modal"
               >
-                <X size={20} />
+                <X size={18} />
               </button>
-
-              <div className="consultation-badge">
-                <Sparkles size={12} />
-                Free Nutrition Guidance
-              </div>
 
               <h3 id="consultation-modal-title" className="consultation-modal-title">
                 Get Free Consultation
@@ -632,22 +687,32 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
               </p>
             </div>
 
-            {/* Modal Content */}
-            <div className="consultation-modal-body">
+            {/* Scrollable Form Body */}
+            <div 
+              ref={scrollableBodyRef}
+              className="consultation-modal-body"
+              data-lenis-prevent="true"
+              onWheel={(e) => {
+                e.stopPropagation();
+              }}
+              onTouchMove={(e) => {
+                e.stopPropagation();
+              }}
+            >
               {isSubmittedSuccess ? (
                 /* Success Confirmation State */
                 <div className="consultation-success-card">
                   <div className="consultation-success-icon">
-                    <CheckCircle2 size={40} />
+                    <CheckCircle2 size={32} />
                   </div>
                   
                   <h4 className="consultation-success-title">
-                    You&apos;re almost done! 🎉
+                    WhatsApp Opened Successfully
                   </h4>
                   
                   <p className="consultation-success-desc">
                     WhatsApp has been opened with your consultation details.<br />
-                    <strong>Please review the message and tap Send to contact our team.</strong>
+                    Please review the message and tap <strong>Send</strong> to connect with our cattle feed specialist.
                   </p>
 
                   {lastGeneratedUrl && (
@@ -656,9 +721,9 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                         href={lastGeneratedUrl} 
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        className="consultation-whatsapp-pill"
+                        className="consultation-whatsapp-link"
                       >
-                        <ExternalLink size={16} /> Didn&apos;t open? Tap to open WhatsApp
+                        <ExternalLink size={15} /> Didn&apos;t open? Tap to open WhatsApp
                       </a>
                     </div>
                   )}
@@ -674,105 +739,111 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                   </div>
                 </div>
               ) : (
-                /* Consultation Form */
+                /* Classic Minimalist Consultation Form */
                 <form onSubmit={handleSubmit} noValidate>
-                  {/* Field 1: Full Name */}
-                  <div className="consultation-form-group">
-                    <label htmlFor="consultation-fullname" className="consultation-label">
-                      <span>Full Name <span className="consultation-label-required">*</span></span>
-                    </label>
-                    <div className="consultation-input-wrapper">
-                      <input
-                        ref={firstInputRef}
-                        id="consultation-fullname"
-                        type="text"
-                        placeholder="Enter your name"
-                        value={formData.fullName}
-                        onChange={(e) => handleInputChange("fullName", e.target.value)}
-                        className={`consultation-input ${errors.fullName ? "has-error" : ""}`}
-                        autoComplete="name"
-                      />
-                    </div>
-                    {errors.fullName && (
-                      <div className="consultation-error-msg">
-                        {errors.fullName}
+                  {/* Row 1: Name and Mobile */}
+                  <div className="consultation-form-grid">
+                    {/* Field 1: Full Name */}
+                    <div className="consultation-form-group">
+                      <label htmlFor="consultation-fullname" className="consultation-label">
+                        <span>Full Name <span className="consultation-label-required">*</span></span>
+                      </label>
+                      <div className="consultation-input-wrapper">
+                        <input
+                          ref={firstInputRef}
+                          id="consultation-fullname"
+                          type="text"
+                          placeholder="Enter your name"
+                          value={formData.fullName}
+                          onChange={(e) => handleInputChange("fullName", e.target.value)}
+                          className={`consultation-input ${errors.fullName ? "has-error" : ""}`}
+                          autoComplete="name"
+                        />
                       </div>
-                    )}
+                      {errors.fullName && (
+                        <div className="consultation-error-msg">
+                          {errors.fullName}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Field 2: Mobile Number */}
+                    <div className="consultation-form-group">
+                      <label htmlFor="consultation-mobile" className="consultation-label">
+                        <span>Mobile Number <span className="consultation-label-required">*</span></span>
+                        <span style={{ fontSize: "11px", color: "#64748B", fontWeight: 400 }}>10 digits</span>
+                      </label>
+                      <div className="consultation-input-wrapper">
+                        <div className="consultation-input-prefix">
+                          <Phone size={13} /> +91
+                        </div>
+                        <input
+                          id="consultation-mobile"
+                          type="tel"
+                          inputMode="numeric"
+                          placeholder="Enter 10-digit mobile"
+                          value={formData.mobileNumber}
+                          onChange={(e) => handleInputChange("mobileNumber", e.target.value)}
+                          className={`consultation-input has-prefix ${errors.mobileNumber ? "has-error" : ""}`}
+                          autoComplete="tel-national"
+                        />
+                      </div>
+                      {errors.mobileNumber && (
+                        <div className="consultation-error-msg">
+                          {errors.mobileNumber}
+                        </div>
+                      )}
+                    </div>
                   </div>
 
-                  {/* Field 2: Mobile Number */}
-                  <div className="consultation-form-group">
-                    <label htmlFor="consultation-mobile" className="consultation-label">
-                      <span>Mobile Number <span className="consultation-label-required">*</span></span>
-                      <span style={{ fontSize: "11px", color: "#64748B", fontWeight: 400 }}>10 digits</span>
-                    </label>
-                    <div className="consultation-input-wrapper">
-                      <div className="consultation-input-prefix">
-                        <Phone size={14} /> +91
+                  {/* Row 2: Location and Number of Cattle */}
+                  <div className="consultation-form-grid">
+                    {/* Field 3: Location */}
+                    <div className="consultation-form-group">
+                      <label htmlFor="consultation-location" className="consultation-label">
+                        <span>Your Location <span className="consultation-label-required">*</span></span>
+                      </label>
+                      <div className="consultation-input-wrapper">
+                        <input
+                          id="consultation-location"
+                          type="text"
+                          placeholder="City / District / State"
+                          value={formData.location}
+                          onChange={(e) => handleInputChange("location", e.target.value)}
+                          className={`consultation-input ${errors.location ? "has-error" : ""}`}
+                          autoComplete="address-level2"
+                        />
                       </div>
-                      <input
-                        id="consultation-mobile"
-                        type="tel"
-                        inputMode="numeric"
-                        placeholder="Enter 10-digit mobile number"
-                        value={formData.mobileNumber}
-                        onChange={(e) => handleInputChange("mobileNumber", e.target.value)}
-                        className={`consultation-input has-prefix ${errors.mobileNumber ? "has-error" : ""}`}
-                        autoComplete="tel-national"
-                      />
+                      {errors.location && (
+                        <div className="consultation-error-msg">
+                          {errors.location}
+                        </div>
+                      )}
                     </div>
-                    {errors.mobileNumber && (
-                      <div className="consultation-error-msg">
-                        {errors.mobileNumber}
-                      </div>
-                    )}
-                  </div>
 
-                  {/* Field 3: Location */}
-                  <div className="consultation-form-group">
-                    <label htmlFor="consultation-location" className="consultation-label">
-                      <span>Your Location <span className="consultation-label-required">*</span></span>
-                    </label>
-                    <div className="consultation-input-wrapper">
-                      <input
-                        id="consultation-location"
-                        type="text"
-                        placeholder="City / District / State (e.g. Mehsana, Gujarat)"
-                        value={formData.location}
-                        onChange={(e) => handleInputChange("location", e.target.value)}
-                        className={`consultation-input ${errors.location ? "has-error" : ""}`}
-                        autoComplete="address-level2"
-                      />
-                    </div>
-                    {errors.location && (
-                      <div className="consultation-error-msg">
-                        {errors.location}
+                    {/* Field 4: Number of Cattle */}
+                    <div className="consultation-form-group">
+                      <label htmlFor="consultation-cattle" className="consultation-label">
+                        <span>Number of Cattle <span className="consultation-label-required">*</span></span>
+                      </label>
+                      <div className="consultation-input-wrapper">
+                        <input
+                          id="consultation-cattle"
+                          type="number"
+                          min="1"
+                          step="1"
+                          placeholder="Enter number of cattle"
+                          value={formData.cattleCount}
+                          onChange={(e) => handleInputChange("cattleCount", e.target.value)}
+                          className={`consultation-input ${errors.cattleCount ? "has-error" : ""}`}
+                        />
                       </div>
-                    )}
-                  </div>
-
-                  {/* Field 4: Number of Cattle */}
-                  <div className="consultation-form-group">
-                    <label htmlFor="consultation-cattle" className="consultation-label">
-                      <span>Number of Cattle <span className="consultation-label-required">*</span></span>
-                    </label>
-                    <div className="consultation-input-wrapper">
-                      <input
-                        id="consultation-cattle"
-                        type="number"
-                        min="1"
-                        step="1"
-                        placeholder="Enter number of cattle (e.g. 15)"
-                        value={formData.cattleCount}
-                        onChange={(e) => handleInputChange("cattleCount", e.target.value)}
-                        className={`consultation-input ${errors.cattleCount ? "has-error" : ""}`}
-                      />
+                      {errors.cattleCount && (
+                        <div className="consultation-error-msg">
+                          {errors.cattleCount}
+                        </div>
+                      )}
                     </div>
-                    {errors.cattleCount && (
-                      <div className="consultation-error-msg">
-                        {errors.cattleCount}
-                      </div>
-                    )}
                   </div>
 
                   {/* Field 5: Consultation Requirement */}
@@ -780,19 +851,22 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                     <label htmlFor="consultation-requirement" className="consultation-label">
                       <span>How can we help you? <span className="consultation-label-required">*</span></span>
                     </label>
-                    <select
-                      id="consultation-requirement"
-                      value={formData.requirement}
-                      onChange={(e) => handleInputChange("requirement", e.target.value)}
-                      className={`consultation-select ${errors.requirement ? "has-error" : ""}`}
-                    >
-                      <option value="" disabled>-- Select Requirement --</option>
-                      {REQUIREMENT_OPTIONS.map((opt) => (
-                        <option key={opt} value={opt}>
-                          {opt}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="consultation-select-wrapper">
+                      <select
+                        id="consultation-requirement"
+                        value={formData.requirement}
+                        onChange={(e) => handleInputChange("requirement", e.target.value)}
+                        className={`consultation-select ${errors.requirement ? "has-error" : ""}`}
+                      >
+                        <option value="" disabled>-- Select Requirement --</option>
+                        {REQUIREMENT_OPTIONS.map((opt) => (
+                          <option key={opt} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
+                      </select>
+                      <ChevronDown size={16} className="consultation-select-icon" />
+                    </div>
                     {errors.requirement && (
                       <div className="consultation-error-msg">
                         {errors.requirement}
@@ -813,7 +887,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                       </label>
                       <textarea
                         id="consultation-other"
-                        placeholder="Briefly describe your requirement..."
+                        placeholder="Briefly describe your requirement"
                         rows={3}
                         value={formData.otherDetails}
                         onChange={(e) => handleInputChange("otherDetails", e.target.value)}
@@ -853,21 +927,17 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                         <motion.span
                           animate={{ rotate: 360 }}
                           transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-                          style={{ display: "inline-block", width: 18, height: 18, border: "2px solid #1B1B1B", borderTopColor: "transparent", borderRadius: "50%" }}
+                          style={{ display: "inline-block", width: 16, height: 16, border: "2px solid #FFFFFF", borderTopColor: "transparent", borderRadius: "50%" }}
                         />
                         Opening WhatsApp...
                       </>
                     ) : (
                       <>
-                        <Send size={18} />
+                        <Send size={16} />
                         Get Free Consultation
                       </>
                     )}
                   </button>
-
-                  <p className="consultation-privacy-note">
-                    🔒 Your details are used strictly to compose your WhatsApp message. No data is stored on our servers.
-                  </p>
                 </form>
               )}
             </div>
