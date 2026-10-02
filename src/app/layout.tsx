@@ -36,6 +36,15 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/icon.svg" />
         <meta name="google-site-verification" content="ELaME-u7g0uPt0qT_XxIGQeTPrgPHrAWTOSu1NeBpCo" />
+        // <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6BSQ7E7PL"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-L6BSQ7E7PL');
+        </script>
       </head>
       <body>
         <SmoothScrollProvider>
