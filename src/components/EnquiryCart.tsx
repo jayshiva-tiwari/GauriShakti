@@ -21,7 +21,7 @@ export default function EnquiryCart() {
   const submitEnquiry = () => {
     const items = cart.map(c => `${c.qty} bags of ${c.name}`).join(", ");
     const text = `Hello, I want to enquire about: ${items}. Please share pricing.`;
-    window.open(`https://wa.me/919876543210?text=${encodeURIComponent(text)}`, "_blank");
+    window.open(`https://wa.me/919792399946?text=${encodeURIComponent(text)}`, "_blank");
   };
 
   return (

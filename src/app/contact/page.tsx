@@ -313,7 +313,7 @@ export default function ContactPage() {
               <Mail size={28} />
             </motion.div>
             <h3 style={{ fontSize: "1.1rem", color: "var(--gray)", marginBottom: "8px" }}>Send an Email</h3>
-            <a href="mailto:hello@gaurishakti.in" style={{ fontSize: "clamp(1.1rem, 1.5vw, 1.4rem)", fontWeight: "700", color: "var(--dark-green)", textDecoration: "none", wordBreak: "break-all" }}>info@premiumfeed.com</a>
+            <a href="mailto:hello@gaurishakti.in" style={{ fontSize: "clamp(1.1rem, 1.5vw, 1.4rem)", fontWeight: "700", color: "var(--dark-green)", textDecoration: "none", wordBreak: "break-all" }}>hello@gaurishakti.in</a>
           </motion.div>
 
           {/* 4. Map Card */}
