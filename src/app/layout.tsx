@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata: Metadata = {
   title: "Gaurishakti | Premium Cattle Feed & Nutrition",
@@ -43,6 +44,7 @@ export default function RootLayout({
           <Footer />
           <FloatingWhatsApp />
         </SmoothScrollProvider>
+        <GoogleAnalytics gaId="G-L6BSQ7E7PL" />
       </body>
     </html>
   );
