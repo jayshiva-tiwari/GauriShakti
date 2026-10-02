@@ -34,6 +34,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/icon.svg" />
+        <meta name="google-site-verification" content="ELaME-u7g0uPt0qT_XxIGQeTPrgPHrAWTOSu1NeBpCo" />
       </head>
       <body>
         <SmoothScrollProvider>
