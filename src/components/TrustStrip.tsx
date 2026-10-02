@@ -9,27 +9,26 @@ export default function TrustStrip() {
       icon: Award,
       title: "1 Million+ Bags Sold",
       subtitle: "Trusted Nationwide",
-      badge: "Industry Proven",
     },
     {
       icon: ShieldCheck,
       title: "ISO & GMP Certified",
       subtitle: "100% Quality Tested",
-      badge: "Govt. Standards",
     },
     {
       icon: Stethoscope,
       title: "Veterinary Approved",
       subtitle: "High Protein Formula",
-      badge: "Clinical Grade",
     },
     {
       icon: Truck,
       title: "Nationwide Distribution",
       subtitle: "Fast Reliable Delivery",
-      badge: "Pan-India",
     },
   ];
+
+  // Repeat items inside each group so each group is wide enough for large displays
+  const repeatedPillars = [...trustPillars, ...trustPillars];
 
   return (
     <section className="trust-cert-section" aria-label="Trust & Certifications">
@@ -42,8 +41,8 @@ export default function TrustStrip() {
           border-bottom: 1px solid rgba(212, 175, 55, 0.2);
           position: relative;
           overflow: hidden;
-          padding: 16px 4%;
-          min-height: 96px;
+          padding: 16px 0;
+          min-height: 94px;
           display: flex;
           align-items: center;
         }
@@ -55,44 +54,91 @@ export default function TrustStrip() {
           top: 0;
           left: 50%;
           transform: translateX(-50%);
-          width: 60%;
+          width: 70%;
           height: 100%;
           background: radial-gradient(ellipse at top, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
           pointer-events: none;
         }
 
-        .trust-cert-container {
-          max-width: 1320px;
-          margin: 0 auto;
-          width: 100%;
+        /* Edge fade masks for seamless enter/exit */
+        .trust-fade-edge-left,
+        .trust-fade-edge-right {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 80px;
+          z-index: 5;
+          pointer-events: none;
         }
 
-        .trust-cards-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
+        .trust-fade-edge-left {
+          left: 0;
+          background: linear-gradient(to right, #0F3322 20%, rgba(15, 51, 34, 0));
+        }
+
+        .trust-fade-edge-right {
+          right: 0;
+          background: linear-gradient(to left, #0F3322 20%, rgba(15, 51, 34, 0));
+        }
+
+        .trust-marquee-wrapper {
+          width: 100%;
+          overflow: hidden;
+          position: relative;
+          mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+          -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+        }
+
+        .trust-marquee-track {
+          display: flex;
+          width: max-content;
+          animation: trustInfinityMarquee 32s linear infinite;
+          will-change: transform;
+        }
+
+        /* Pause on hover so user can easily read or inspect */
+        .trust-marquee-track:hover {
+          animation-play-state: paused;
+        }
+
+        @keyframes trustInfinityMarquee {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        .trust-marquee-group {
+          display: flex;
+          align-items: center;
           gap: 18px;
+          padding-right: 18px; /* Ensures exact distance matching the gap */
+          flex-shrink: 0;
         }
 
         .trust-card {
-          background: rgba(255, 255, 255, 0.035);
-          border: 1px solid rgba(212, 175, 55, 0.2);
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid rgba(212, 175, 55, 0.22);
           border-radius: 12px;
-          padding: 14px 18px;
+          padding: 13px 18px;
           display: flex;
           align-items: center;
           gap: 14px;
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);
-          transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
           cursor: default;
-          position: relative;
+          flex-shrink: 0;
+          user-select: none;
         }
 
         .trust-card:hover {
-          transform: translateY(-3px);
-          background: rgba(255, 255, 255, 0.075);
+          transform: translateY(-2px);
+          background: rgba(255, 255, 255, 0.08);
           border-color: rgba(212, 175, 55, 0.55);
-          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28), 0 0 18px rgba(212, 175, 55, 0.12);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28), 0 0 16px rgba(212, 175, 55, 0.15);
         }
 
         .trust-icon-box {
@@ -106,11 +152,11 @@ export default function TrustStrip() {
           justify-content: center;
           color: #D4AF37;
           flex-shrink: 0;
-          transition: all 0.28s ease;
+          transition: all 0.25s ease;
         }
 
         .trust-card:hover .trust-icon-box {
-          transform: scale(1.08);
+          transform: scale(1.06);
           background: rgba(212, 175, 55, 0.2);
           border-color: #D4AF37;
           color: #F8E7A2;
@@ -124,27 +170,23 @@ export default function TrustStrip() {
         }
 
         .trust-card-title {
-          font-size: 0.96rem;
+          font-size: 0.95rem;
           font-weight: 700;
           color: #FFFFFF;
-          line-height: 1.3;
+          line-height: 1.25;
           letter-spacing: -0.01em;
           white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
         }
 
         .trust-card-subtitle {
           font-size: 0.82rem;
           font-weight: 500;
-          color: rgba(255, 255, 255, 0.76);
+          color: rgba(255, 255, 255, 0.78);
           display: flex;
           align-items: center;
           gap: 6px;
-          line-height: 1.3;
+          line-height: 1.25;
           white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
         }
 
         .trust-gold-dot {
@@ -153,71 +195,88 @@ export default function TrustStrip() {
           display: inline-block;
         }
 
-        /* Responsive Breakpoints */
-        @media (max-width: 1120px) {
-          .trust-cards-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-          }
+        @media (max-width: 768px) {
           .trust-cert-section {
-            padding: 18px 4%;
+            padding: 12px 0;
+            min-height: 84px;
           }
-        }
-
-        @media (max-width: 680px) {
-          .trust-cert-section {
-            padding: 14px 16px;
+          .trust-marquee-track {
+            animation-duration: 25s;
           }
-          .trust-cards-grid {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
+          .trust-marquee-group {
             gap: 12px;
-            padding-bottom: 4px;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-          }
-          .trust-cards-grid::-webkit-scrollbar {
-            display: none;
+            padding-right: 12px;
           }
           .trust-card {
-            min-width: 250px;
-            flex-shrink: 0;
-            scroll-snap-align: start;
-            padding: 12px 14px;
+            padding: 10px 14px;
+            gap: 12px;
           }
           .trust-icon-box {
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
           }
           .trust-card-title {
-            font-size: 0.92rem;
+            font-size: 0.88rem;
           }
           .trust-card-subtitle {
-            font-size: 0.78rem;
+            font-size: 0.76rem;
+          }
+          .trust-fade-edge-left,
+          .trust-fade-edge-right {
+            width: 36px;
           }
         }
       `}} />
 
-      <div className="trust-cert-container">
-        <div className="trust-cards-grid">
-          {trustPillars.map((item, index) => {
-            const IconComponent = item.icon;
-            return (
-              <div key={index} className="trust-card">
-                <div className="trust-icon-box">
-                  <IconComponent size={22} strokeWidth={1.8} />
+      {/* Visual edge fades */}
+      <div className="trust-fade-edge-left" aria-hidden="true" />
+      <div className="trust-fade-edge-right" aria-hidden="true" />
+
+      {/* Infinite Marquee Container */}
+      <div className="trust-marquee-wrapper" data-lenis-prevent="true">
+        <div className="trust-marquee-track">
+          {/* Primary Group */}
+          <div className="trust-marquee-group">
+            {repeatedPillars.map((item, index) => {
+              const IconComponent = item.icon;
+              return (
+                <div key={`group1-${index}`} className="trust-card">
+                  <div className="trust-icon-box">
+                    <IconComponent size={22} strokeWidth={1.8} />
+                  </div>
+                  <div className="trust-text-content">
+                    <span className="trust-card-title">{item.title}</span>
+                    <span className="trust-card-subtitle">
+                      <span className="trust-gold-dot">◆</span>
+                      <span>{item.subtitle}</span>
+                    </span>
+                  </div>
                 </div>
-                <div className="trust-text-content">
-                  <h3 className="trust-card-title">{item.title}</h3>
-                  <p className="trust-card-subtitle">
-                    <span className="trust-gold-dot">◆</span>
-                    <span>{item.subtitle}</span>
-                  </p>
+              );
+            })}
+          </div>
+
+          {/* Clone Group for seamless infinite looping */}
+          <div className="trust-marquee-group" aria-hidden="true">
+            {repeatedPillars.map((item, index) => {
+              const IconComponent = item.icon;
+              return (
+                <div key={`group2-${index}`} className="trust-card">
+                  <div className="trust-icon-box">
+                    <IconComponent size={22} strokeWidth={1.8} />
+                  </div>
+                  <div className="trust-text-content">
+                    <span className="trust-card-title">{item.title}</span>
+                    <span className="trust-card-subtitle">
+                      <span className="trust-gold-dot">◆</span>
+                      <span>{item.subtitle}</span>
+                    </span>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
